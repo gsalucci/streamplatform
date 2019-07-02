@@ -64,6 +64,7 @@
 
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
+                    this.player.src('')
                     this.player.reset()
                     
                 }
