@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered video-js vjs-default-skin vjs-fluid"  :options='playerOptions' ref="videoPlayer"></video-player>
+    <video-player class="vjs-big-play-centered vjs-default-skin vjs-fluid"  :options='playerOptions' ref="videoPlayer"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -37,13 +37,16 @@
         watch: {
             streamOnline() {
                 if (this.streamOnline) {
-                    console.log('[streamOnlineWatcher] stream is ONLINE')
-                    console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
-                    this.player.src({
-                        src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
-                        type: 'application/x-mpegURL'
-                    })
-                    this.player.play()
+                    console.log('[streamOnlineWatcher] stream is ONLINE buffering for 5 seconds')
+                    setTimeout(() => {
+                        console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
+                        this.player.src({
+                            src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
+                            type: 'application/x-mpegURL'
+                        })
+                        this.player.play()
+                    },5000)
+
 
 
                 } else {
