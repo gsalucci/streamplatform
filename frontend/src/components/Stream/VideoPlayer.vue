@@ -15,8 +15,6 @@
                 autoplay: false,
                 controls: true,
                 techOrder: ['html5'],
-                liveui: true,
-                nativeControlsForTouch: true,
                 html5: { hls: { withCredentials: false } },
             }
         }),
@@ -49,7 +47,8 @@
                     let interval = setInterval(() => {
                         fetch(process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8', {
                             method:'GET'
-                        }).then((res) => {
+                        })
+                        .then((res) => {
                             if (res.ok) {
                                 console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
                                 this.player.src({
@@ -58,6 +57,9 @@
                                 })
                                 clearInterval(interval)
                             }
+                        })
+                        .catch(e => {
+
                         })
                     },100)
 
