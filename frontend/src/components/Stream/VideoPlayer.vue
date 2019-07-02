@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @loadeddata="loaded" @readystatechange="ready"></video-player>
+    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @loadeddata="loaded" @readystatechange="ready" @ended="ended"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -37,17 +37,31 @@
             },
             ready(){
                 console.log('[ready] readyState changed!')
+            },
+            ended(){
+                console.log('[ended] player finished playback')
+                this.player.src("")
             }
         },
         watch: {
             streamOnline() {
                 if (this.streamOnline) {
                     console.log('[streamOnlineWatcher] stream is ONLINE')
-                    console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
-                    this.player.src({
-                        src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
-                        type: 'application/x-mpegURL'
-                    })
+                    let interval = setInterval(() => {
+                        fetch(process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8', {
+                            method:'GET'
+                        }).then((res) => {
+                            if (res.ok) {
+                                console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
+                                this.player.src({
+                                    src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
+                                    type: 'application/x-mpegURL'
+                                })
+                                clearInterval(interval)
+                            }
+                        })
+                    },100)
+
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
                 }
