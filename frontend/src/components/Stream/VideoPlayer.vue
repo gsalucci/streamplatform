@@ -15,6 +15,7 @@
                 autoplay: false,
                 controls: true,
                 techOrder: ['html5'],
+                fluid: true,
                 html5: { hls: { withCredentials: false } },
             }
         }),
