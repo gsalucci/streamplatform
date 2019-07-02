@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered vjs-fluid"  :options='playerOptions' ref="videoPlayer" @canplay="canPlay"></video-player>
+    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @canplay="canPlay"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -45,7 +45,6 @@
                     })
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
-                    this.player.src({})
                 }
             }
         }
