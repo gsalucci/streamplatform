@@ -1,9 +1,9 @@
 <template>
     <v-card>
         <v-card-text>
-            <v-flex xs12>
+            <!-- <v-flex xs12> -->
                 <VideoPlayer/>
-            </v-flex>
+            <!-- </v-flex> -->
         </v-card-text>
         <v-divider/>
         <v-card-actions class="pa-3" justify-center>

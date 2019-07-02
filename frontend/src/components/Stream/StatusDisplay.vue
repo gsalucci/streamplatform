@@ -23,7 +23,7 @@
             <v-icon>schedule</v-icon>
         </v-flex>
         <v-flex xs2>
-            {{streamDuration}}
+            {{formattedDuration}}
         </v-flex>
         <v-flex xs1>
             <v-icon>people</v-icon>
@@ -48,7 +48,15 @@
                 'streamOnline',
                 'streamDuration',
                 'streamSpectators'
-            ])
+            ]),
+            formattedDuration(){
+                let h, m, s = 0
+                let t = this.streamDuration / 1000
+                s = t % 60
+                m = Math.floor(t / 60)
+                h = Math.floor(t/ 3600)
+                return h +':'+m+':'+s
+            }
         },
         
     }
