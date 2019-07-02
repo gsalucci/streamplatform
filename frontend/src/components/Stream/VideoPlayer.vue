@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @canplay="canPlay"></video-player>
+    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @loadeddata="loaded" @readystatechange="ready"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -29,9 +29,12 @@
             }
         },
         methods: {
-            canPlay() {
-                console.log('[canPlay] player can play!')
+            loaded() {
+                console.log('[loaded] player can play!')
                 this.player.play()          
+            },
+            ready(){
+                console.log('[ready] readyState changed!')
             }
         },
         watch: {
