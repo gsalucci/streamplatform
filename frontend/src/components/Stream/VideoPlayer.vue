@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered"  :options='playerOptions'></video-player>
+    <video-player class="vjs-big-play-centered video-js vjs-default-skin vjs-fluid"  :options='playerOptions' ref="videoPlayer"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -13,11 +13,11 @@
             playerOptions: {
                 muted: true,
                 fluid:true,
-                autoplay: true,
+                autoplay: false,
                 controls: true,
                 techOrder: ['html5'],
                 html5: { hls: { withCredentials: false } },
-                sources: []
+                //sources: []
                     // {
                     //     src: 'http://stream.mpk.dynu.net/hls/live.m3u8',
                     //     type: 'application/x-mpegURL'
@@ -30,22 +30,25 @@
         },
         computed: {
             ...mapGetters(['streamName', 'streamOnline']),
+            player() {
+                return this.$refs.videoPlayer.player
+            }
         },
         watch: {
             streamOnline() {
                 if (this.streamOnline) {
-                    console.log('[streamOnlineWatcher] stream is ONLINE, buffering for 5 seconds')
-                    setTimeout(function() {
-                        console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
-                        this.playerOptions.sources.push({
-                            src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
-                            type: 'application/x-mpegURL'
-                        })
-                    },5000)
+                    console.log('[streamOnlineWatcher] stream is ONLINE')
+                    console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
+                    this.player.src({
+                        src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
+                        type: 'application/x-mpegURL'
+                    })
+                    this.player.play()
+
 
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
-                    this.playerOptions.sources=[]
+                    this.player.src({})
                 }
             }
         }
