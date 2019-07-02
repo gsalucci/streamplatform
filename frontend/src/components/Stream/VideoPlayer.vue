@@ -34,12 +34,15 @@
         watch: {
             streamOnline() {
                 if (this.streamOnline) {
-                    console.log('[streamOnlineWatcher] stream is ONLINE')
-                    console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
-                    this.playerOptions.sources.push({
-                        src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
-                        type: 'application/x-mpegURL'
-                    })
+                    console.log('[streamOnlineWatcher] stream is ONLINE, buffering for 5 seconds')
+                    setTimeout(function() {
+                        console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
+                        this.playerOptions.sources.push({
+                            src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
+                            type: 'application/x-mpegURL'
+                        })
+                    },5000)
+
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
                     this.playerOptions.sources=[]
