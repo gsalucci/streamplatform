@@ -55,7 +55,7 @@
                 s = t % 60
                 m = Math.floor(t / 60)
                 h = Math.floor(t/ 3600)
-                return h +':'+m+':'+s
+                return h +' : '+m+' : '+s
             }
         },
         
