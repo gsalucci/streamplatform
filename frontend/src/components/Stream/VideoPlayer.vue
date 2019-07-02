@@ -12,10 +12,12 @@
         data: () => ({
             playerOptions: {
                 muted: true,
-                fluid:true,
                 autoplay: false,
                 controls: true,
                 techOrder: ['html5'],
+                responsive: true,
+                liveui: true,
+                nativeControlsForTouch: true,
                 html5: { hls: { withCredentials: false } },
             }
         }),
