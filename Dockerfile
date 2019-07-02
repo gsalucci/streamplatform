@@ -1,8 +1,5 @@
 FROM alpine
  
-ENV VIDEOJS_VERSION 7.5.5
-ENV HLS_VERSION 5.15.0
- 
 RUN apk update  \
     && apk add --no-cache openssl ca-certificates nginx nginx-mod-rtmp ffmpeg nodejs nodejs-npm\
     && rm -rf /var/cache/apk/* \
