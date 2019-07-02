@@ -64,6 +64,8 @@
 
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
+                    this.player.reset()
+                    
                 }
             }
         }
