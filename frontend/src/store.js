@@ -23,7 +23,7 @@ export default new Vuex.Store({
     SOCKET_STATUS_UPDATE: (state, payload) => {
       // payload: {streamName: <String>, online: <Boolean>, duration: <Number>, spectators: <Number>}
       //console.log("[SOCKET_STATUS_UPDATE] status update received: "+JSON.stringify(payload))
-      payload.streamName !== 'undefined' ? state.streamName = payload.streamName : state.streamName = undefined;
+      payload.streamName !== undefined ? state.streamName = payload.streamName : state.streamName = undefined;
       state.streamOnline = payload.online;
       state.streamDuration = payload.duration
       state.streamSpectators = payload.spectators

@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @loadeddata="loaded" @readystatechange="ready" @ended="ended"></video-player>
+    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @readystatechange="ready" @ended="ended"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -29,16 +29,13 @@
             }
         },
         methods: {
-            loaded() {
-                console.log('[loaded] player can play!')
-                this.player.play()          
-            },
             ready(){
                 console.log('[ready] readyState changed!')
             },
             ended(){
                 console.log('[ended] player finished playback')
                 this.player.src("")
+                this.player.reset()
             }
         },
         watch: {
@@ -56,11 +53,12 @@
                                     src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
                                     type: 'application/x-mpegURL'
                                 })
+                                this.player.play()
                                 clearInterval(interval)
                             }
                         })
                         .catch(e => {
-
+                            console.log("Awaiting playlist...")
                         })
                     },100)
 
