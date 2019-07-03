@@ -1,21 +1,22 @@
 <template>
   <v-app dark>
-    <!-- <v-toolbar dark flat>
-      <v-toolbar-title>Stream Platform</v-toolbar-title>
-    </v-toolbar> -->
-    <v-content>
+    <!-- <v-content>
       <v-container grid-list-md ma-0 pa-0 fluid>
         <v-layout row wrap>
-          <!-- <v-flex style="width: 1000px"> -->
           <v-flex>
             <Stream/>
           </v-flex>
-          <!-- <v-flex style="width: 300px"> -->
             <v-flex>
             <Chat/>
           </v-flex>
         </v-layout>
       </v-container>
+    </v-content> -->
+    <v-content>
+      <v-layout column>
+          <Stream/>
+          <Chat/>
+      </v-layout>
     </v-content>
   </v-app>
 </template>

@@ -10,15 +10,16 @@
             <StatusDisplay/>
         </v-card-actions>
     </v-card> -->
-    <v-layout column>
-        <v-flex xs12>
-            <VideoPlayer/>
-        </v-flex>
+    <div>
+        <v-layout column>
+        <VideoPlayer/>
         <v-divider/>
         <v-flex xs12>
             <StatusDisplay/>
         </v-flex>
-    </v-layout>
+    </v-layout>    
+    </div>
+
 
 </template>
 

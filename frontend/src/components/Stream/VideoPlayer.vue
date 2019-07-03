@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @ready="ready" @ended="ended"></video-player>
+    <video-player class="vjs-big-play-centered vjs-default-skin vjs-16-9" width="640" height="264" :options='playerOptions' ref="videoPlayer" @ready="ready" @ended="ended"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
