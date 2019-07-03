@@ -1,10 +1,10 @@
 <template>
     <v-layout row align-center>
-        <v-flex>
+        <v-flex xs11>
             <v-text-field v-model="input" :error="validationError" @input="validationError = false" :placeholder="placeholderText" @keyup.enter="onSubmit" clearable hide-details/>
         </v-flex>
-        <v-flex xs1>
-            <v-btn flat icon class="mt-4 ml-0 pr-3" @click="onSubmit"><v-icon>send</v-icon></v-btn>
+        <v-flex class="mt-4 ml-0 mr-4">
+            <v-btn flat icon  @click="onSubmit"><v-icon>send</v-icon></v-btn>
         </v-flex>
     </v-layout>
 </template>
