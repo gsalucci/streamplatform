@@ -106,7 +106,7 @@ app.post('/on_play_done',(req,res)=>{
 })
 
 app.post('/on_publish_done',(req,res)=>{
-    //prettyPrint('POST','on_publish_done',req)
+    prettyPrint('POST','on_publish_done',req)
     res.status(200).send();
 })
 
