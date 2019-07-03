@@ -14,7 +14,7 @@
     <v-layout column justify-center>
 
             <VideoPlayer/>
-            <v-divider/>
+            <v-divider class="mt-2"/>
             <StatusDisplay/>
     </v-layout>
    

@@ -1,26 +1,26 @@
 <template>
   <v-app dark>
     <v-content >
-      <v-container grid-list-md ma-0 pa-0 fluid hidden-md-and-down>
+      <v-container grid-list-md ma-0 pa-0 fluid>
         <v-layout row wrap>
-          <v-flex xs8>
+          <v-flex style="width: 750px">
             <Stream/>
           </v-flex>
-            <v-flex>
+            <v-flex style="width:400px">
             <Chat/>
           </v-flex>
         </v-layout>
       </v-container>
 
-      <v-layout column justify-center hidden-lg-and-up>
+      <!-- <v-layout column justify-center hidden-lg-and-up>
         <v-flex>
           <Stream/>
         </v-flex>
         <v-flex>
           <Chat/>
         </v-flex>
-      </v-layout>
-    </v-content>
+      </v-layout>-->
+    </v-content> 
   </v-app>
 </template>
 

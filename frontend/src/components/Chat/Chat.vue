@@ -16,18 +16,14 @@
         </v-card> -->
         <v-layout column>
             <v-flex xs12>
-                <v-container>
+                <v-container ml-2 mt-2 mb-0 mr-0 pa-0 fluid>
                     <v-layout row justify-start>
                         <v-icon>chat</v-icon>
                         <v-layout row justify-center>
                             <h3 class="headline mb-0">Chat</h3>
                         </v-layout>
                     </v-layout>                    
-                </v-container>
 
-            </v-flex>
-            <v-flex xs12>
-                <v-container>
                     <ChatHistory/>
                     <Notification v-if="notification"/>
                     <ChatInput />                    

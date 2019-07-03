@@ -1,15 +1,12 @@
 <template>
-    <v-flex xs12>
-        <v-layout row align-center>
-        
-            <v-flex>
-                <v-text-field v-model="input" :error="validationError" @input="validationError = false" :placeholder="placeholderText" @keyup.enter="onSubmit" clearable hide-details/>
-            </v-flex>
-            <v-flex xs1>
-                <v-btn flat icon class="mt-4 ml-0" @click="onSubmit"><v-icon>send</v-icon></v-btn>
-            </v-flex>
+    <v-layout row align-center>
+        <v-flex xs11>
+            <v-text-field v-model="input" :error="validationError" @input="validationError = false" :placeholder="placeholderText" @keyup.enter="onSubmit" clearable hide-details/>
+        </v-flex>
+        <v-flex xs1>
+            <v-btn flat icon class="mt-4 ml-0" @click="onSubmit"><v-icon>send</v-icon></v-btn>
+        </v-flex>
     </v-layout>
-    </v-flex>
 </template>
 
 <script>
