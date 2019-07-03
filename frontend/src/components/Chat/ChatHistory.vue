@@ -65,7 +65,7 @@
     padding: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
-    max-width: 400px;
+    max-width: 350px;
 }
 
 .speechBubble:after {
@@ -85,13 +85,13 @@
 
 .ownSpeechBubble {
     position: relative;
-    right: 20px;
+    right: 30px;
 	background: #005c64;
 	border-radius: .4em;
     padding: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
-    max-width: 400px;
+    max-width: 350px;
 }
 
 .ownSpeechBubble:after {
