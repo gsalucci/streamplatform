@@ -6,7 +6,7 @@
           <v-flex style="width: 750px">
             <Stream/>
           </v-flex>
-            <v-flex style="width:400px">
+            <v-flex style="width:450px">
             <Chat/>
           </v-flex>
         </v-layout>
