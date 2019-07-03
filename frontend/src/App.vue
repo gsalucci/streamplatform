@@ -1,8 +1,8 @@
 <template>
   <v-app dark>
-    <v-content >
+    <v-content>
       <v-container grid-list-md ma-0 pa-0 fluid>
-        <v-layout row wrap>
+        <v-layout row wrap @click="onClick">
           <v-flex style="width: 750px">
             <Stream/>
           </v-flex>
@@ -27,6 +27,7 @@
 <script>
 import Stream from './components/Stream/Stream'
 import Chat from './components/Chat/Chat'
+import NoSleep from 'nosleep.js'
 export default {
   name: 'App',
   components: {
@@ -35,7 +36,14 @@ export default {
   },
   data () {
     return {
-      //
+      noSleepEnabled: false,
+      noSleep: new NoSleep()
+    }
+  },
+  methods: {
+    onClick() {
+      console.log('[onClick] App click')
+      this.noSleepEnabled ? console.log(this.noSleepEnabled) : this.noSleep.enable(); this.noSleepEnabled = true;
     }
   },
   updated: function () {
