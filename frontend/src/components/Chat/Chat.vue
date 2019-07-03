@@ -1,5 +1,5 @@
 <template>
-        <v-card height="100%">
+        <!-- <v-card height="100%">
             <v-card-title primary-title>
                 <v-icon>chat</v-icon>
                 <v-layout row justify-center>
@@ -13,7 +13,27 @@
             <v-card-actions class="pa-3">
                 <ChatInput/>   
             </v-card-actions>
-        </v-card>
+        </v-card> -->
+        <v-layout column>
+            <v-flex xs12>
+                <v-container>
+                    <v-layout row justify-start>
+                        <v-icon>chat</v-icon>
+                        <v-layout row justify-center>
+                            <h3 class="headline mb-0">Chat</h3>
+                        </v-layout>
+                    </v-layout>                    
+                </v-container>
+
+            </v-flex>
+            <v-flex xs12>
+                <v-container>
+                    <ChatHistory/>
+                    <Notification v-if="notification"/>
+                    <ChatInput class="pa-3"/>                    
+                </v-container>
+            </v-flex>
+        </v-layout>
 </template>
 
 <script>

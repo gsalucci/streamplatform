@@ -3,12 +3,12 @@
     <v-toolbar dark flat>
       <v-toolbar-title>Stream Platform</v-toolbar-title>
     </v-toolbar>
-    <v-container grid-list-md>
+    <v-container grid-list-md ma-0 pa-0 fluid>
       <v-layout row wrap>
         <v-flex style="width: 1000px">
           <Stream/>
         </v-flex>
-        <v-flex style="width: 600px">
+        <v-flex style="width: 300px">
           <Chat/>
         </v-flex>
       </v-layout>

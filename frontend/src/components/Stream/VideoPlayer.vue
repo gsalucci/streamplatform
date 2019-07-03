@@ -18,6 +18,7 @@
                 fluid: true,
                 html5: { hls: { withCredentials: false } },
                 handleManifestRedirects: true,
+                enableLowInitialPlaylist: false
             }
         }),
         components: {
@@ -59,7 +60,7 @@
                             }
                         })
                         .catch(e => {
-                            console.log("Awaiting playlist...")
+                            console.log("Awaiting playlist..." + JSON.stringify(e))
                         })
                     },100)
 

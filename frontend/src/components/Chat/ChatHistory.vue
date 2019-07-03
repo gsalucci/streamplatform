@@ -47,8 +47,8 @@
 
 <style>
 .chatHistory {
-    height: 500px;
-    max-height: 500px;
+    height: 250px;
+    max-height: 250px;
     /* width: 100%; */
     overflow-y: auto;
     overflow-x:hidden;
