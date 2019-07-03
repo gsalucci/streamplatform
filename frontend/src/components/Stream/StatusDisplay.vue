@@ -1,25 +1,25 @@
 <template>
-    <v-layout row align-center justify-center class="text-xs-center">
-        <v-flex xs1>
+    <v-layout row align-center justfy-space-around class="text-xs-center">
+        <v-flex>
             <v-icon v-if="streamOnline" style="color: green">input</v-icon>
             <v-icon v-if="!streamOnline" style="color: red">input</v-icon>
         </v-flex>
-        <v-flex v-if="streamName" xs2>
+        <v-flex v-if="streamName">
             {{streamName}}
         </v-flex>
-        <v-flex v-if="!streamName" xs2>
+        <v-flex v-if="!streamName">
             Offline
         </v-flex>
-        <v-flex xs1>
+        <v-flex >
             <v-icon>schedule</v-icon>
         </v-flex>
-        <v-flex xs3>
+        <v-flex >
             {{formattedDuration}}
         </v-flex>
-        <v-flex xs1>
+        <v-flex>
             <v-icon>people</v-icon>
         </v-flex>
-        <v-flex xs2>
+        <v-flex>
             {{streamSpectators}}
         </v-flex>
     </v-layout>

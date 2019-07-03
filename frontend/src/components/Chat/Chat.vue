@@ -30,7 +30,7 @@
                 <v-container>
                     <ChatHistory/>
                     <Notification v-if="notification"/>
-                    <ChatInput class="pa-3"/>                    
+                    <ChatInput />                    
                 </v-container>
             </v-flex>
         </v-layout>
