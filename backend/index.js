@@ -64,7 +64,7 @@ app.get('/', (req,res)=>{
 app.post('/on_publish',(req,res)=>{
     //prettyPrint('POST','on_publish',req);
     status.online = true;
-    if (streamName === undefined){
+    if (status.streamName === undefined){
         status.streamName = req.body.name
         console.log("Stream is online: "+status.streamName)
     }    
