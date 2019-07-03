@@ -39,7 +39,10 @@ import {mapGetters} from 'vuex'
             onSubmit() {
                 if (this.input!=''){
                     if (this.chatUser === undefined) {
-                        this.$store.dispatch('joinChat',{name: this.input, color: this.getRandomColor()})
+                        let chatUser = {name: this.input, color: this.getRandomColor()}
+                        this.$store.dispatch('joinChat', chatUser)
+                        console.log('[onSubmit] Storing cookie')
+                        this.$cookies.set('chatUser',chatUser)
                         this.input = ''
                     } else {
                         this.$store.dispatch('sendChatMessage', {chatUser: this.chatUser,message: this.input})
@@ -49,6 +52,14 @@ import {mapGetters} from 'vuex'
                 else this.validationError = true
             }
         },
+        mounted() {
+            console.log('[mounted] checking user cookie: '+ JSON.stringify(userFromCookie))
+            let userFromCookie = this.$cookies.get('chatUser')
+            if (userFromCookie){
+                console.log('[mounted] user found')
+                this.$store.dispatch('joinChat', userFromCookie)
+            }
+        }
     }
 </script>
 

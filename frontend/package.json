@@ -12,6 +12,7 @@
     "socket.io-client": "^2.2.0",
     "videojs-contrib-hls": "^5.15.0",
     "vue": "^2.6.10",
+    "vue-cookies": "^1.5.13",
     "vue-socket.io-extended": "^3.2.1",
     "vue-video-player": "^5.0.2",
     "vuetify": "^1.5.5",

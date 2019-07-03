@@ -41,10 +41,6 @@ export default {
   updated: function () {
     console.log('[App] scrolling to bottom')
     document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
-  },
-  mounted: function() {
-    console.log("MOUNTED!")
-    window.scrollTo(0, 1);
   }
 }
 </script>
