@@ -48,7 +48,7 @@ io.on('connection', socket => {
     socket.on('send_chat_message',data => {
         let id = chatHistory.length + 1
         chatHistory.push({id: id, message: data.message, chatUser: data.chatUser});
-        console.log("[" + data.chatUser.name + "] " + "says: " + data.message + " [ "+id+" ]")
+        console.log("[" + data.chatUser.name + "] " + "says: " + data.message )
         Object.keys(sockets).forEach(k => {
             sockets[k].emit('chat_message',chatHistory[chatHistory.length-1]);
         });
