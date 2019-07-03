@@ -1,5 +1,5 @@
 <template>
-    <v-layout row align-center justfy-space-around class="text-xs-center">
+    <v-layout row align-center justfy-space-around class="text-xs-center" pt-4>
         <v-flex>
             <v-icon v-if="streamOnline" style="color: green">input</v-icon>
             <v-icon v-if="!streamOnline" style="color: red">input</v-icon>

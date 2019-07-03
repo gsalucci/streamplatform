@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered vjs-default-skin vjs-16-9" width="640" height="264" :options='playerOptions' ref="videoPlayer" @ready="ready" @ended="ended"></video-player>
+<video-player class="vjs-big-play-centered" controls :playsinline="true" :options='playerOptions' ref="videoPlayer" @ready="ready" @ended="ended"/>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -11,11 +11,12 @@
     export default {
         data: () => ({
             playerOptions: {
+                preload:'auto',
+                responsive: true,
                 muted: true,
                 autoplay: false,
-                controls: true,
-                techOrder: ['html5'],
                 fluid: true,
+                techOrder: ['html5'],
                 html5: { hls: { withCredentials: false } },
                 handleManifestRedirects: true,
                 enableLowInitialPlaylist: false
@@ -66,7 +67,7 @@
 
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
-                    //this.player.src('')
+                    this.player.src('')
                     //this.player.reset()
                     
                 }

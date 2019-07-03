@@ -1,5 +1,5 @@
 <template>
-    <!-- <v-card>
+    <!-- <v-card hidden-md-and-down>
         <v-card-text>
             <v-flex xs12>
                 <VideoPlayer/>
@@ -10,15 +10,14 @@
             <StatusDisplay/>
         </v-card-actions>
     </v-card> -->
-    <div>
-        <v-layout column>
-        <VideoPlayer/>
-        <v-divider/>
-        <v-flex xs12>
+    
+    <v-layout column justify-center>
+
+            <VideoPlayer/>
+            <v-divider/>
             <StatusDisplay/>
-        </v-flex>
-    </v-layout>    
-    </div>
+    </v-layout>
+   
 
 
 </template>

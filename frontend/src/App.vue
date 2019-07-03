@@ -1,9 +1,9 @@
 <template>
   <v-app dark>
-    <!-- <v-content>
-      <v-container grid-list-md ma-0 pa-0 fluid>
+    <v-content >
+      <v-container grid-list-md ma-0 pa-0 fluid hidden-md-and-down>
         <v-layout row wrap>
-          <v-flex>
+          <v-flex xs8>
             <Stream/>
           </v-flex>
             <v-flex>
@@ -11,11 +11,14 @@
           </v-flex>
         </v-layout>
       </v-container>
-    </v-content> -->
-    <v-content>
-      <v-layout column>
+
+      <v-layout column justify-center hidden-lg-and-up>
+        <v-flex>
           <Stream/>
+        </v-flex>
+        <v-flex>
           <Chat/>
+        </v-flex>
       </v-layout>
     </v-content>
   </v-app>
