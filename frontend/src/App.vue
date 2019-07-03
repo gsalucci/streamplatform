@@ -2,7 +2,7 @@
   <v-app dark>
     <v-content>
       <v-container grid-list-md ma-0 pa-0 fluid>
-        <v-layout row wrap @click="onClick">
+        <v-layout row wrap>
           <v-flex style="width: 750px">
             <Stream/>
           </v-flex>
