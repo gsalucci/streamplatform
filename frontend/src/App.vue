@@ -27,7 +27,7 @@
 <script>
 import Stream from './components/Stream/Stream'
 import Chat from './components/Chat/Chat'
-import NoSleep from 'nosleep.js'
+// import NoSleep from 'nosleep.js'
 export default {
   name: 'App',
   components: {
@@ -36,15 +36,15 @@ export default {
   },
   data () {
     return {
-      noSleepEnabled: false,
-      noSleep: new NoSleep()
+      // noSleepEnabled: false,
+      // noSleep: new NoSleep()
     }
   },
   methods: {
-    onClick() {
-      console.log('[onClick] App click')
-      this.noSleepEnabled ? console.log(this.noSleepEnabled) : this.noSleep.enable(); this.noSleepEnabled = true;
-    }
+    // onClick() {
+    //   console.log('[onClick] App click')
+    //   this.noSleepEnabled ? console.log(this.noSleepEnabled) : this.noSleep.enable(); this.noSleepEnabled = true;
+    // }
   },
   updated: function () {
     console.log('[App] scrolling to bottom')
