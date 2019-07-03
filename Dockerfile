@@ -11,6 +11,7 @@ COPY backend /www/backend
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD startup.sh /
 RUN chown nginx:nginx /www /var/sock /var/rec
+RUN chmod 777 /var/rec
 RUN cd /www/frontend \
     && npm install \
     && npm run build \
