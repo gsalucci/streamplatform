@@ -13,7 +13,8 @@
             playerOptions: {
                 preload:'auto',
                 responsive: true,
-                muted: true,
+                muted: false,
+                controls: true,
                 autoplay: false,
                 fluid: true,
                 techOrder: ['html5'],
