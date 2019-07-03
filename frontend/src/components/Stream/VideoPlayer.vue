@@ -18,7 +18,6 @@
                 fluid: true,
                 html5: { hls: { withCredentials: false } },
                 handleManifestRedirects: true,
-                enableLowInitialPlaylist: true
             }
         }),
         components: {
@@ -66,7 +65,7 @@
 
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
-                    this.player.src('')
+                    //this.player.src('')
                     this.player.reset()
                     
                 }

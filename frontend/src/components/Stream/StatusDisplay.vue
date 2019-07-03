@@ -8,7 +8,7 @@
             {{streamName}}
         </v-flex>
         <v-flex v-if="!streamName" xs2>
-            No Stream
+            Offline
         </v-flex>
         <v-flex xs1>
             <v-icon>schedule</v-icon>
