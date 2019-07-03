@@ -1,5 +1,5 @@
 <template>
-<video-player class="vjs-big-play-centered" controls :playsinline="true" :options='playerOptions' ref="videoPlayer" @ready="ready" @ended="ended"/>
+<video-player class="vjs-big-play-centered" controls :playsinline="true" :options='playerOptions' ref="videoPlayer" @error="onError"/>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -32,13 +32,8 @@
             }
         },
         methods: {
-            ready(){
-                console.log('[ready] readyState changed!')
-            },
-            ended(){
-                console.log('[ended] player finished playback')
-                this.player.src("")
-                this.player.pause()
+            onError(e) {
+                console.log('[videoPlayer] error: '+JSON.stringify(e))
             }
         },
         watch: {
@@ -67,7 +62,7 @@
 
                 } else {
                     console.log('[streamOnlineWatcher] stream is OFFLINE')
-                    this.player.src('')
+                    //this.player.src('')
                     //this.player.reset()
                     
                 }
