@@ -64,8 +64,10 @@ app.get('/', (req,res)=>{
 app.post('/on_publish',(req,res)=>{
     //prettyPrint('POST','on_publish',req);
     status.online = true;
-    status.streamName === undefined ? status.streamName = req.body.name : status.streamName=status.streamName; //debouncing
-    console.log("Stream is online: "+status.streamName)
+    if (streamName === undefined){
+        status.streamName = req.body.name
+        console.log("Stream is online: "+status.streamName)
+    }    
     res.status(200).send();
 })
 
@@ -101,7 +103,7 @@ app.post('/on_play',(req,res)=>{
 })
 
 app.post('/on_play_done',(req,res)=>{
-    //prettyPrint('POST','on_play_done',req)
+    prettyPrint('POST','on_play_done',req)
     res.status(200).send();
 })
 
