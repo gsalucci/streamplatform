@@ -1,5 +1,5 @@
 <template>
-    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @readystatechange="ready" @ended="ended"></video-player>
+    <video-player class="vjs-big-play-centered"  :options='playerOptions' ref="videoPlayer" @ready="ready" @ended="ended"></video-player>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -17,6 +17,8 @@
                 techOrder: ['html5'],
                 fluid: true,
                 html5: { hls: { withCredentials: false } },
+                handleManifestRedirects: true,
+                enableLowInitialPlaylist: true
             }
         }),
         components: {
@@ -35,7 +37,7 @@
             ended(){
                 console.log('[ended] player finished playback')
                 this.player.src("")
-                this.player.reset()
+                this.player.pause()
             }
         },
         watch: {
