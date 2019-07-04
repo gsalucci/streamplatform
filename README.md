@@ -20,13 +20,20 @@ VUE_APP_STREAM_BASE=https://yourHostName/hls/
 VUE_APP_SOCKET_IO=https://yourHostName/
 ```
 
-To run the app, we need to build a docker image and then run it mapping the container ports to the host ports.
-
-If you want to record your stream uncomment the relative lines in `nginx.conf` and map a local folder to the container's path: `/var/rec`, see [here](https://docs.docker.com/storage/volumes/)
-
+To run the app, we need to build a docker image
 ```shell
 cd /path/to/repo
 docker build -t aName .
+```
+while it's building we can create and set the permissions to the host folder where our streams will be recorded
+```shell
+mkdir /host/rec/folder
+sudo chmod 777 /host/rec/folder
+```
+
+and then run it mapping the container ports to the host ports and the containers volume to the host folder we just created
+
+```shell
 docker run -d -p 80:80 -p 1935:1935 -p 8080:8080 -v /host/rec/folder:/var/rec aName
 ```
 
@@ -72,7 +79,7 @@ The backend of this application consists of 3 services:
 
     * **Stream recording option**
 
-        It is possible to record your stream by uncommenting the relative lines in `nginx.conf` and by mapping a local path to the container's volume: `/var/rec`.
+        By default NGINX is configured to record your live streams, those will be saved to the containers internal path: `/var/rec`
 
 2. ## Express and Socket.io
 

@@ -1,0 +1,5 @@
+**/node_modules
+**/dist
+**/.env.production.local
+**/.env.development.local
+**/TODO.md
