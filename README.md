@@ -2,7 +2,7 @@
 All-in-one RTMP/HLS streaming platform easily deploayble via docker/caprover Includes NGINX configuration for optimal RTMP/HLS streaming, backend HTTP/WebSocket server to allow comunication from NGINX to the frontend, and realtime chat capabilities.
 
 # Deployment
-This application is designed to be deployed via docker, using the included `Dockerfile`
+This application is designed to be deployed via [docker](https://docs.docker.com/install/), using the included `Dockerfile`
 
 First step is to clone the repo and create a file inside `/path/to/repo/frontend` named `.env.production`
 
@@ -27,7 +27,7 @@ If you want to record your stream uncomment the relative lines in `nginx.conf` a
 ```shell
 cd /path/to/repo
 docker build -t aName .
-docker run -d -p 80:80 -p 1935:1935 -p 8080:8080 aName
+docker run -d -p 80:80 -p 1935:1935 -p 8080:8080 -v /host/rec/folder:/var/rec aName
 ```
 
 # Streaming (OBS Studio)
