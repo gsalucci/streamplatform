@@ -52,15 +52,6 @@
           </v-flex>
         </v-layout>
       </v-container>
-
-      <!-- <v-layout column justify-center hidden-lg-and-up>
-        <v-flex>
-          <Stream/>
-        </v-flex>
-        <v-flex>
-          <Chat/>
-        </v-flex>
-      </v-layout>-->
     </v-content> 
   </v-app>
 </template>
@@ -69,7 +60,6 @@
 import Stream from './components/Stream/Stream'
 import Chat from './components/Chat/Chat'
 import {mapGetters} from 'vuex'
-// import NoSleep from 'nosleep.js'
 export default {
   name: 'App',
   components: {
@@ -95,15 +85,11 @@ export default {
     formatDate(d){
       return new Date(d).toLocaleDateString(navigator.language || navigator.userLanguage,{year:'2-digit',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})
     }
-    // onClick() {
-    //   console.log('[onClick] App click')
-    //   this.noSleepEnabled ? console.log(this.noSleepEnabled) : this.noSleep.enable(); this.noSleepEnabled = true;
-    // }
   },
-  updated: function () {
-    console.log('[App] scrolling to bottom')
-    document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
-  },
+  // updated: function () {
+  //   console.log('[App] scrolling to bottom')
+  //   document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
+  // },
   created: function () {
     this.$store.dispatch('setHostname', location.host)
     this.$store.dispatch('setVods')
