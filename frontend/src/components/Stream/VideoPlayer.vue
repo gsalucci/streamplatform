@@ -48,8 +48,12 @@
                         .then((res) => {
                             if (res.ok) {
                                 console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
+                                // this.player.src({
+                                //     src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
+                                //     type: 'application/x-mpegURL'
+                                // })
                                 this.player.src({
-                                    src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
+                                    src: '/hls' + this.streamName + '.m3u8',
                                     type: 'application/x-mpegURL'
                                 })
                                 this.player.play()
