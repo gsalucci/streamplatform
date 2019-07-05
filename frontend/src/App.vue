@@ -9,24 +9,28 @@
           <v-list-tile-content>
             <v-list-tile-title>Past Streams</v-list-tile-title>
           </v-list-tile-content>
-          <v-list-tile-action @click="refreshVods">
-            <v-icon>refresh</v-icon>
+          <v-list-tile-action >
+            <v-btn icon @click="refreshVods">
+              <v-icon>refresh</v-icon>
+            </v-btn>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
       <v-divider light/>
       <v-list>
-        <v-list-tile v-for="v in vods" v-bind:key="v.mtime">
+        <v-list-tile v-for="v in vods" v-bind:key="v.mtime" @click="playVod(v)">
           <v-list-tile-content>
             <v-list-tile-title>
               {{v.name}}
             </v-list-tile-title>
             <v-list-tile-sub-title>
-              date: {{new Date(v.mtime)}}
+              date: {{new Date(v.mtime).toLocaleDateString(navigator.language || navigator.userLanguage,{year:'2-digit',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})}}
             </v-list-tile-sub-title>
           </v-list-tile-content>
-          <v-list-tile-action @click="playVod(v)">
-            <v-icon>chevron_right</v-icon>
+          <v-list-tile-action>
+            <v-btn icon @click="playVod(v)">
+              <v-icon>chevron_right</v-icon>
+            </v-btn>           
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
