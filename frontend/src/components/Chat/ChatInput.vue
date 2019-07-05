@@ -53,8 +53,8 @@ import {mapGetters} from 'vuex'
             }
         },
         mounted() {
-            console.log('[mounted] checking user cookie: '+ JSON.stringify(userFromCookie))
             let userFromCookie = this.$cookies.get('chatUser')
+            console.log('[mounted] checking user cookie: '+ JSON.stringify(userFromCookie))
             if (userFromCookie){
                 console.log('[mounted] user found')
                 this.$store.dispatch('joinChat', userFromCookie)

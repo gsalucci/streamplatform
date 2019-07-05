@@ -78,7 +78,7 @@ export default new Vuex.Store({
     },
     setVods: async function(context){
       console.log('Fetching vods list')
-      context.commit('SET_VODS', await fetch('/vods/'))
+      context.commit('SET_VODS', await fetch('/vod/'))
     }
 
 
