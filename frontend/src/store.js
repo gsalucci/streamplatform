@@ -13,6 +13,8 @@ export default new Vuex.Store({
     chatUser: undefined,
     chatHistory: [],
     notification: undefined,
+    hostname: undefined,
+    vods: undefined
 
   },
   mutations: {
@@ -39,6 +41,14 @@ export default new Vuex.Store({
       console.log("[SET_CHAT_USER] setting chatUser to: "+JSON.stringify(payload))
       state.chatUser = payload
     },
+    SET_HOSTNAME: (state, payload) => {
+      console.log("[SET_HOST_NAME] setting hostname to: "+JSON.stringify(payload))
+      state.hostname = payload
+    },
+    SET_VODS: (state, payload) => {
+      console.log("[SET_VODS] setting vods to: "+JSON.stringify(payload))
+      state.vods = payload
+    }
 
   },
   actions: {
@@ -62,6 +72,15 @@ export default new Vuex.Store({
       console.log('[socket_joinOk] Chat joined confirmation received: '+JSON.stringify(payload))
       context.commit('SET_NOTIFICATION', {type: 'joined-chat', data: {name:'You', color: payload.color}})
       context.commit('SET_CHAT_USER', payload)
+    },
+    setHostname: (context, payload) => {
+      context.commit('SET_HOSTNAME',payload)
+    },
+    setVods: async function(context){
+      console.log('Fetching vods list')
+      context.commit('SET_VODS', await fetch(
+        this.hostname + '/vods/'
+      ))
     }
 
 
@@ -74,6 +93,8 @@ export default new Vuex.Store({
     chatUsers: state => state.chatUsers,
     chatUser: state => state.chatUser,
     chatHistory: state => state.chatHistory,
-    notification: state => state.notification
+    notification: state => state.notification,
+    hostname: state => state.hostname,
+    vods: state => state.vods
   }
 })

@@ -1,5 +1,11 @@
 <template>
   <v-app dark>
+    <v-navigation-drawer dark v-model="drawer" app clipped></v-navigation-drawer>
+    <v-toolbar dark app clipped-left>
+      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Streaming Platform</v-toolbar-title>
+    </v-toolbar>
+    
     <v-content>
       <v-container grid-list-md ma-0 pa-0 fluid>
         <v-layout row wrap>
@@ -36,8 +42,7 @@ export default {
   },
   data () {
     return {
-      // noSleepEnabled: false,
-      // noSleep: new NoSleep()
+      drawer: false
     }
   },
   methods: {
@@ -49,6 +54,10 @@ export default {
   updated: function () {
     console.log('[App] scrolling to bottom')
     document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
+  },
+  created: function () {
+    this.$store.dispatch('setHostname', location.host)
+    this.$store.dispatch('setVods')
   }
 }
 </script>
