@@ -42,7 +42,7 @@
                 if (this.streamOnline) {
                     console.log('[streamOnlineWatcher] stream is ONLINE')
                     let interval = setInterval(() => {
-                        fetch(process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8', {
+                        fetch('/hls/' + this.streamName + '.m3u8', {
                             method:'GET'
                         })
                         .then((res) => {
