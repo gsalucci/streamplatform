@@ -24,7 +24,7 @@
               {{v.name}}
             </v-list-tile-title>
             <v-list-tile-sub-title>
-              date: {{new Date(v.mtime).toLocaleDateString(navigator.language || navigator.userLanguage,{year:'2-digit',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})}}
+              date: {{formatDate(v.mtime)}}
             </v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
@@ -91,6 +91,9 @@ export default {
     },
     playVod(v) {
       console.log('[App] playVod: '+JSON.stringify(v))
+    },
+    formatDate(d){
+      return new Date(d).toLocaleDateString(navigator.language || navigator.userLanguage,{year:'2-digit',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})
     }
     // onClick() {
     //   console.log('[onClick] App click')
