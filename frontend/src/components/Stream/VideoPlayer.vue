@@ -53,7 +53,7 @@
                                 //     type: 'application/x-mpegURL'
                                 // })
                                 this.player.src({
-                                    src: '/hls' + this.streamName + '.m3u8',
+                                    src: '/hls/' + this.streamName + '.m3u8',
                                     type: 'application/x-mpegURL'
                                 })
                                 this.player.play()
