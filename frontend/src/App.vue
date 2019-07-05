@@ -26,7 +26,7 @@
             </v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action @click="playVod(v)">
-            <v-icon>play</v-icon>
+            <v-icon>chevron_right</v-icon>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
