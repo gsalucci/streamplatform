@@ -21,7 +21,7 @@
         <v-list-tile v-for="v in vods" v-bind:key="v.mtime" @click="playVod(v)">
           <v-list-tile-content>
             <v-list-tile-title>
-              {{v.name}}
+              {{v.name.split('_')[0]}}
             </v-list-tile-title>
             <v-list-tile-sub-title>
               date: {{formatDate(v.mtime)}}
