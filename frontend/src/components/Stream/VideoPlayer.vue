@@ -17,7 +17,7 @@
                 controls: true,
                 autoplay: false,
                 fluid: true,
-                techOrder: ['html5'],
+                techOrder: ['html5','flash'],
                 html5: { 
                     hls: { withCredentials: false }, 
                     mp4: { withCredentials: false }
@@ -76,7 +76,7 @@
                     console.log('[vodWatcher] setting player source to: /vod/'+this.vod)
                     this.player.src({
                         src: '/vod/' + this.vod,
-                        type: 'video/mp4'
+                        type: 'video/x-flv'//'video/mp4'
                     })
                     this.player.play()
                 }
