@@ -73,9 +73,10 @@
             },
             vod(){
                 if (this.vod) {
-                    console.log('[vodWatcher] setting player source to: /vod/'+this.vod)
+                    
+                    console.log('[vodWatcher] setting player source to: https://stream.mpk.dynu.net/vod/'+this.vod)
                     this.player.src({
-                        src: '/vod/' + this.vod,
+                        src: 'https://stream.mpk.dynu.net/vod/' + this.vod,
                         type: 'video/mp4'
                     })
                     this.player.play()
