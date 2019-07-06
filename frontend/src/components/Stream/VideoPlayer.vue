@@ -70,7 +70,7 @@
             },
             vod(){
                 if (this.vod) {
-                    console.log('[vodWatcher] selected vod is: '+this.vod+' setting player source to: '-'/vod/'+this.vod)
+                    console.log('[vodWatcher] setting player source to: /vod/'+this.vod)
                     this.player.src({
                         src: '/vod/' + this.vod,
                         type: 'video/mp4'
