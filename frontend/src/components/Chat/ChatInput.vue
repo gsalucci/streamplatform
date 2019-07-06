@@ -41,7 +41,7 @@ import {mapGetters} from 'vuex'
                     if (this.chatUser === undefined) {
                         let chatUser = {name: this.input, color: this.getRandomColor()}
                         this.$store.dispatch('joinChat', chatUser)
-                        console.log('[onSubmit] Storing cookie')
+                        //console.log('[onSubmit] Storing cookie')
                         this.$cookies.set('chatUser',chatUser)
                         this.input = ''
                     } else {
@@ -54,9 +54,9 @@ import {mapGetters} from 'vuex'
         },
         mounted() {
             let userFromCookie = this.$cookies.get('chatUser')
-            console.log('[mounted] checking user cookie: '+ JSON.stringify(userFromCookie))
+            //console.log('[mounted] checking user cookie: '+ JSON.stringify(userFromCookie))
             if (userFromCookie){
-                console.log('[mounted] user found')
+                //console.log('[mounted] user found')
                 this.$store.dispatch('joinChat', userFromCookie)
             }
         }

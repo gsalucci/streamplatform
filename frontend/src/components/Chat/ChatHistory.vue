@@ -31,13 +31,13 @@
         },
         updated() {
             this.chatBox = document.getElementById('chatBox')
-            console.log('[ChatHistory_updated] scrolling to bottom')
+            //console.log('[ChatHistory_updated] scrolling to bottom')
             this.chatBox.scrollTop = this.chatBox.scrollHeight;
         },
         watch: {
             chatHistory: function () { 
             this.$nextTick(function () {
-                console.log('[ChatHistory_watch] scrolling to bottom')
+                //console.log('[ChatHistory_watch] scrolling to bottom')
                 this.chatBox.scrollTop = this.chatBox.scrollHeight;
             });
             }

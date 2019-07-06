@@ -37,20 +37,20 @@
         },
         methods: {
             onError(e) {
-                console.log('[videoPlayer] error: '+JSON.stringify(e))
+                //console.log('[videoPlayer] error: '+JSON.stringify(e))
             }
         },
         watch: {
             streamOnline() {
                 if (this.streamOnline) {
-                    console.log('[streamOnlineWatcher] stream is ONLINE')
+                    //console.log('[streamOnlineWatcher] stream is ONLINE')
                     let interval = setInterval(() => {
                         fetch('/hls/' + this.streamName + '.m3u8', {
                             method:'GET'
                         })
                         .then((res) => {
                             if (res.ok) {
-                                console.log('[streamOnlineWatcher] setting player source to: /hls/'+ this.streamName + '.m3u8')
+                                //console.log('[streamOnlineWatcher] setting player source to: /hls/'+ this.streamName + '.m3u8')
                                 this.player.src({
                                     src: '/hls/' + this.streamName + '.m3u8',
                                     type: 'application/x-mpegURL'
@@ -60,12 +60,12 @@
                             }
                         })
                         .catch(e => {
-                            console.log("Awaiting playlist..." + JSON.stringify(e))
+                            //console.log("Awaiting playlist..." + JSON.stringify(e))
                         })
                     },100)
 
                 } else {
-                    console.log('[streamOnlineWatcher] stream is OFFLINE')
+                    //console.log('[streamOnlineWatcher] stream is OFFLINE')
                     //this.player.src('')
                     //this.player.reset()
                     
@@ -74,7 +74,7 @@
             vod(){
                 if (this.vod) {
                     
-                    console.log('[vodWatcher] setting player source to: https://stream.mpk.dynu.net/vod/'+this.vod)
+                    //console.log('[vodWatcher] setting player source to: https://stream.mpk.dynu.net/vod/'+this.vod)
                     this.player.src({
                         src: 'https://stream.mpk.dynu.net/vod/' + this.vod,
                         type: 'video/mp4'

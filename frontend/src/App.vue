@@ -76,21 +76,17 @@ export default {
   },
   methods: {
     refreshVods() {
-      console.log('[App] Refreshing Vods')
+      //console.log('[App] Refreshing Vods')
       this.$store.dispatch('setVods')
     },
     playVod(v) {
-      console.log('[App] playVod: '+JSON.stringify(v))
+      //console.log('[App] playVod: '+JSON.stringify(v))
       this.$store.dispatch('playVod',v.name)
     },
     formatDate(d){
       return new Date(d).toLocaleDateString(navigator.language || navigator.userLanguage,{year:'2-digit',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})
     }
   },
-  // updated: function () {
-  //   console.log('[App] scrolling to bottom')
-  //   document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
-  // },
   created: function () {
     this.$store.dispatch('setHostname', location.host)
     this.$store.dispatch('setVods')

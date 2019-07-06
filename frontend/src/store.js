@@ -20,34 +20,34 @@ export default new Vuex.Store({
   },
   mutations: {
     SOCKET_CHAT_MESSAGE: (state, payload) => {
-      console.log("[SOCKET_CHAT_MESSAGE] chat message received: "+JSON.stringify(payload))
+      //console.log("[SOCKET_CHAT_MESSAGE] chat message received: "+JSON.stringify(payload))
       state.chatHistory.push(payload)
     },
     SOCKET_STATUS_UPDATE: (state, payload) => {
       // payload: {streamName: <String>, online: <Boolean>, duration: <Number>, spectators: <Number>}
-      //console.log("[SOCKET_STATUS_UPDATE] status update received: "+JSON.stringify(payload))
+      ////console.log("[SOCKET_STATUS_UPDATE] status update received: "+JSON.stringify(payload))
       payload.streamName !== undefined ? state.streamName = payload.streamName : state.streamName = undefined;
       state.streamOnline = payload.online;
       state.streamDuration = payload.duration
       state.streamSpectators = payload.spectators
     },
     SET_NOTIFICATION: (state, payload) => {
-      console.log("[SET_NOTIFICATION] new notification: "+JSON.stringify(payload))
+      //console.log("[SET_NOTIFICATION] new notification: "+JSON.stringify(payload))
       state.notification = payload
       setTimeout(()=> {
         state.notification = undefined
       },3000)
     },
     SET_CHAT_USER: (state, payload) => {
-      console.log("[SET_CHAT_USER] setting chatUser to: "+JSON.stringify(payload))
+      //console.log("[SET_CHAT_USER] setting chatUser to: "+JSON.stringify(payload))
       state.chatUser = payload
     },
     SET_HOSTNAME: (state, payload) => {
-      console.log("[SET_HOST_NAME] setting hostname to: "+JSON.stringify(payload))
+      //console.log("[SET_HOST_NAME] setting hostname to: "+JSON.stringify(payload))
       state.hostname = payload
     },
     SET_VODS: (state, payload) => {
-      console.log("[SET_VODS] setting vods to: "+JSON.stringify(payload))
+      //console.log("[SET_VODS] setting vods to: "+JSON.stringify(payload))
       state.vods = payload
     },
     PLAY_VOD: (state,payload) => {
@@ -60,20 +60,20 @@ export default new Vuex.Store({
       socket.emit('join_chat', payload)
     },
     sendChatMessage: (context,payload) => {
-      console.log('[sendChatMessage] sending message: '+JSON.stringify(payload))
+      //console.log('[sendChatMessage] sending message: '+JSON.stringify(payload))
       socket.emit('send_chat_message',payload)
       //context.commit('SOCKET_CHAT_MESSAGE', payload)
     },
     socket_joinedChat: (context, payload) => {
-      console.log('[socket_joinedChat] payload: '+JSON.stringify(payload))
+      //console.log('[socket_joinedChat] payload: '+JSON.stringify(payload))
       context.commit('SET_NOTIFICATION', {type: 'joined-chat', data: payload})
     },
     socket_leftChat: (context,payload) => {
-      console.log('[socket_leftChat] payload: '+JSON.stringify(payload))
+      //console.log('[socket_leftChat] payload: '+JSON.stringify(payload))
       context.commit('SET_NOTIFICATION', {type: 'left-chat', data: payload})
     },
     socket_joinedOk: (context, payload) => {
-      console.log('[socket_joinOk] Chat joined confirmation received: '+JSON.stringify(payload))
+      //console.log('[socket_joinOk] Chat joined confirmation received: '+JSON.stringify(payload))
       context.commit('SET_NOTIFICATION', {type: 'joined-chat', data: {name:'You', color: payload.color}})
       context.commit('SET_CHAT_USER', payload)
     },
@@ -81,19 +81,19 @@ export default new Vuex.Store({
       context.commit('SET_HOSTNAME',payload)
     },
     setVods: context =>{
-      console.log('[setVods] Fetching vods list')
+      //console.log('[setVods] Fetching vods list')
       fetch('/vod/')
         .then(res => res.json())
         .then(data => {
           let mp4s = []
           data.forEach(v => {
-            v.name.split('.')[1] === 'mp4' ? mp4s.push(v) : console.log('flv')
+            if (v.name.split('.')[1] === 'mp4') mp4s.push(v)
           });
           context.commit('SET_VODS', mp4s)
         })
     },
     playVod: (context,payload) => {
-      console.log('[playVod] playing: '+payload)
+      //console.log('[playVod] playing: '+payload)
       context.commit('PLAY_VOD',payload)
     }
 
