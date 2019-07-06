@@ -84,7 +84,13 @@ export default new Vuex.Store({
       console.log('[setVods] Fetching vods list')
       fetch('/vod/')
         .then(res => res.json())
-        .then(data => context.commit('SET_VODS', data))
+        .then(data => {
+          let mp4s = []
+          data.forEach(v => {
+            v.name.split('.')[1] === 'mp4' ? mp4s.push(v) : console.log('flv')
+          });
+          context.commit('SET_VODS', mp4s)
+        })
     },
     playVod: (context,payload) => {
       console.log('[playVod] playing: '+payload)
