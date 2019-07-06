@@ -48,7 +48,9 @@ export default new Vuex.Store({
     },
     SET_VODS: (state, payload) => {
       //console.log("[SET_VODS] setting vods to: "+JSON.stringify(payload))
-      state.vods = payload
+      state.vods = payload.sort((a,b)=>{
+        return b.mtime-a.mtime
+      })
     },
     PLAY_VOD: (state,payload) => {
       state.vod = payload
