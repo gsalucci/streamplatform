@@ -27,7 +27,7 @@
             videoPlayer
         },
         computed: {
-            ...mapGetters(['streamName', 'streamOnline']),
+            ...mapGetters(['streamName', 'streamOnline','vod']),
             player() {
                 return this.$refs.videoPlayer.player
             }
@@ -47,11 +47,7 @@
                         })
                         .then((res) => {
                             if (res.ok) {
-                                console.log('[streamOnlineWatcher] setting player source to: '+process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8')
-                                // this.player.src({
-                                //     src: process.env.VUE_APP_STREAM_BASE + this.streamName + '.m3u8',
-                                //     type: 'application/x-mpegURL'
-                                // })
+                                console.log('[streamOnlineWatcher] setting player source to: /hls/'+ this.streamName + '.m3u8')
                                 this.player.src({
                                     src: '/hls/' + this.streamName + '.m3u8',
                                     type: 'application/x-mpegURL'
@@ -71,7 +67,17 @@
                     //this.player.reset()
                     
                 }
+            },
+            vod(){
+                if (this.vod) {
+                    this.player.src({
+                        src: '/vod/' + this.vod,
+                        type: 'video/mp4'
+                    })
+                    this.player.play()
+                }
             }
+
         }
     }
 </script>

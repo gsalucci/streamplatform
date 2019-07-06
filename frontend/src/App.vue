@@ -81,6 +81,7 @@ export default {
     },
     playVod(v) {
       console.log('[App] playVod: '+JSON.stringify(v))
+      this.$store.dispatch('playVod',v.name)
     },
     formatDate(d){
       return new Date(d).toLocaleDateString(navigator.language || navigator.userLanguage,{year:'2-digit',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})

@@ -14,7 +14,8 @@ export default new Vuex.Store({
     chatHistory: [],
     notification: undefined,
     hostname: undefined,
-    vods: undefined
+    vods: undefined,
+    vod: undefined
 
   },
   mutations: {
@@ -48,6 +49,9 @@ export default new Vuex.Store({
     SET_VODS: (state, payload) => {
       console.log("[SET_VODS] setting vods to: "+JSON.stringify(payload))
       state.vods = payload
+    },
+    PLAY_VOD: (state,payload) => {
+      state.vod = payload
     }
 
   },
@@ -76,13 +80,17 @@ export default new Vuex.Store({
     setHostname: (context, payload) => {
       context.commit('SET_HOSTNAME',payload)
     },
-    setVods: async function(context){
-      console.log('Fetching vods list')
+    setVods: context =>{
+      console.log('[setVods] Fetching vods list')
       fetch('/vod/')
         .then(res => res.json())
         .then(data => context.commit('SET_VODS', data))
-      
+    },
+    playVod: (context,payload) => {
+      console.log('[playVod] playing: '+payload)
+      context.commit('PLAY_VOD',payload)
     }
+
 
 
   },
@@ -96,6 +104,7 @@ export default new Vuex.Store({
     chatHistory: state => state.chatHistory,
     notification: state => state.notification,
     hostname: state => state.hostname,
-    vods: state => state.vods
+    vods: state => state.vods,
+    vod: state => state.vod
   }
 })
