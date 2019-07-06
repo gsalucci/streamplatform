@@ -18,7 +18,10 @@
                 autoplay: false,
                 fluid: true,
                 techOrder: ['html5'],
-                html5: { hls: { withCredentials: false } },
+                html5: { 
+                    hls: { withCredentials: false }, 
+                    mp4: { withCredentials: false }
+                    },
                 handleManifestRedirects: true,
                 enableLowInitialPlaylist: false
             }
