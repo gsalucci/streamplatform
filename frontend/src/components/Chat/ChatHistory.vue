@@ -17,7 +17,7 @@
             </div>
         <template v-slot:activator="{ on }">
         <div>
-            
+
         </div>
         </template>        
        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="selectedMessage">            
@@ -82,10 +82,11 @@
         },
         methods: {
             showMenu(message) {
-                console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + this.selectedMessage)
+                console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(this.selectedMessage))
                 this.selectedMessage = message
                 if (this.chatUser.admin){
-                    this.menu = false;
+                    this.menu = true;
+                    console.log('[ChatHistory_showMenu] opening menu')
                 }
                 
             }
