@@ -78,7 +78,7 @@
             }
 
         },
-        created: function() {
+        mounted: function() {
             console.log('[videoPlayer_created] setting videojs log level to off')
             this.player.log.level('off')
         }
