@@ -1,6 +1,5 @@
 <template>
     <v-layout column align-start height="100%" class="chatHistory" id="chatBox">
-        <template v-slot:activator="{ on }">
             <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click="showMenu(message)">
                 <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
                     <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
@@ -15,7 +14,7 @@
                     </div>
                 </v-layout>
             </div>
-        </template>        
+        <template v-slot:activator="{ on }"></template>        
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>            
             <v-card>
                 <v-list>
@@ -78,6 +77,7 @@
         },
         methods: {
             showMenu(message) {
+                console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + this.selectedMessage)
                 this.selectedMessage = message
                 if (this.chatUser.admin){
                     this.menu = false;
@@ -89,6 +89,9 @@
             this.chatBox = document.getElementById('chatBox')
             //console.log('[ChatHistory_updated] scrolling to bottom')
             this.chatBox.scrollTop = this.chatBox.scrollHeight;
+        },
+        mounted(){
+            console.log('[ChatHistory_Mounted] chatHistory: '+JSON.stringify(this.chatHistory))
         },
         watch: {
             chatHistory: function () { 
