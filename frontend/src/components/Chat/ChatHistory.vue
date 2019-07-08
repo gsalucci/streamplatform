@@ -1,7 +1,7 @@
 <template>
     <v-layout column align-start height="100%" class="chatHistory" id="chatBox">
         <template v-slot:activator="{ on }">
-            <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click="menu = true">
+            <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click="showMenu(message)">
                 <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
                     <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
                         <v-layout column justify-start align-start text-xs-left>
@@ -16,28 +16,15 @@
                 </v-layout>
             </div>
         </template>        
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="chatUser.admin">            
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>            
             <v-card>
                 <v-list>
-                <v-list-tile avatar>
-                    <v-list-tile-avatar>
-                    <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-                    </v-list-tile-avatar>
-
+                <v-list-tile>
                     <v-list-tile-content>
-                    <v-list-tile-title>John Leider</v-list-tile-title>
-                    <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
+                        Actions for:
+                        <v-list-tile-title>{{selectedMessage.chatUser.name}}</v-list-tile-title>
+                        <v-list-tile-sub-title>{{selectedMessage.message}}</v-list-tile-sub-title>
                     </v-list-tile-content>
-
-                    <v-list-tile-action>
-                    <v-btn
-                        :class="fav ? 'red--text' : ''"
-                        icon
-                        @click="fav = !fav"
-                    >
-                        <v-icon>favorite</v-icon>
-                    </v-btn>
-                    </v-list-tile-action>
                 </v-list-tile>
                 </v-list>
 
@@ -46,16 +33,16 @@
                 <v-list>
                 <v-list-tile>
                     <v-list-tile-action>
-                    <v-switch color="purple"></v-switch>
+                    <v-switch color="purple" v-model="censor"></v-switch>
                     </v-list-tile-action>
-                    <v-list-tile-title>Enable messages</v-list-tile-title>
+                    <v-list-tile-title>Censor message</v-list-tile-title>
                 </v-list-tile>
 
                 <v-list-tile>
                     <v-list-tile-action>
-                    <v-switch color="purple"></v-switch>
+                    <v-switch color="purple" v-model="banUser"></v-switch>
                     </v-list-tile-action>
-                    <v-list-tile-title>Enable hints</v-list-tile-title>
+                    <v-list-tile-title>Ban User</v-list-tile-title>
                 </v-list-tile>
                 </v-list>
 
@@ -63,7 +50,7 @@
                 <v-spacer></v-spacer>
 
                 <v-btn flat @click="menu = false">Cancel</v-btn>
-                <v-btn color="primary" flat @click="menu = false">Save</v-btn>
+                <v-btn color="primary" flat @click="menu = false">Apply</v-btn>
                 </v-card-actions>
             </v-card>
         </v-menu>
@@ -77,6 +64,9 @@
             return {
                 chatBox: undefined,
                 menu: false,
+                selectedMessage: undefined,
+                censor: false,
+                banUser: false,
             }
         },
         components: {},
@@ -85,6 +75,15 @@
                 'chatUser',
                 'chatHistory'
             ])
+        },
+        methods: {
+            showMenu(message) {
+                this.selectedMessage = message
+                if (this.chatUser.admin){
+                    this.menu = false;
+                }
+                
+            }
         },
         updated() {
             this.chatBox = document.getElementById('chatBox')
