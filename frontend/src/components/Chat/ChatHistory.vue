@@ -1,22 +1,22 @@
 <template>
     <v-layout column align-start height="100%" class="chatHistory" id="chatBox">
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="chatUser.admin">
-                <template v-slot:activator="{ on }">
-        <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click="menu = true">
-                    <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
-                        <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
-                            <v-layout column justify-start align-start text-xs-left>
-                                <div class="font-weight-bold" v-bind:style="{ color: message.chatUser.color}" v-if="message.chatUser !== chatUser">
-                                    {{message.chatUser.name}}
-                                </div>
-                                <div>
-                                    {{message.message}}
-                                </div>
-                            </v-layout>
-                        </div>
-                    </v-layout>
-                
-            
+        <template v-slot:activator="{ on }" v-if="chatUser.admin">
+            <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click="menu = true">
+                <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
+                    <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
+                        <v-layout column justify-start align-start text-xs-left>
+                            <div class="font-weight-bold" v-bind:style="{ color: message.chatUser.color}" v-if="message.chatUser !== chatUser">
+                                {{message.chatUser.name}}
+                            </div>
+                            <div>
+                                {{message.message}}
+                            </div>
+                        </v-layout>
+                    </div>
+                </v-layout>
+            </div>
+        </template>        
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>            
             <v-card>
                 <v-list>
                 <v-list-tile avatar>
@@ -66,12 +66,8 @@
                 <v-btn color="primary" flat @click="menu = false">Save</v-btn>
                 </v-card-actions>
             </v-card>
-            
-        </div>
-        </template>
         </v-menu>
     </v-layout>
-    
 </template>
 
 <script>
@@ -85,7 +81,10 @@
         },
         components: {},
         computed: {
-            ...mapGetters(['chatUser','chatHistory'])
+            ...mapGetters([
+                'chatUser',
+                'chatHistory'
+            ])
         },
         updated() {
             this.chatBox = document.getElementById('chatBox')
