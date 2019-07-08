@@ -21,6 +21,7 @@
                     :type="showPw ? 'text' : 'password'"
                     @click:append="showPw = !showPw"
                     placeholder="Password"
+                    @keyup.enter="onSubmit"
                 ></v-text-field>
             </v-flex>
         </v-layout>

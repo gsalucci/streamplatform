@@ -19,7 +19,7 @@
                 <v-container ml-2 mt-2 mb-0 mr-0 pa-0 fluid>
                     <v-layout row>
                         <v-flex xs2><v-icon>chat</v-icon></v-flex>
-                        <v-flex xs8><h3 class="headline mb-0">Chat</h3></v-flex>
+                        <v-flex xs8 class="text-xs-center"><h3 class="headline mb-0">Chat</h3></v-flex>
                         <v-flex xs2 v-if="chatUser"><v-btn icon @click="leaveChat">
                                 <v-icon>exit_to_app</v-icon>
                             </v-btn></v-flex>
