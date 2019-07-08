@@ -61,11 +61,11 @@ import {mapGetters} from 'vuex'
                 if (this.input!=''){
                     if (this.chatUser === undefined) {
                         let chatUser = {name: this.input, color: this.getRandomColor(), admin: false}
-                        console.log('[ChatInput_onSubmit] adminSwitch: '+this.adminSwitch + ' typed password: '+ this.password + ' required password: '+process.env.VUE_APP_ADMIN_PASSWORD)
                         if (this.adminSwitch && this.password == process.env.VUE_APP_ADMIN_PASSWORD){
                             console.log('[ChatInput_onSubmit] Admin user authenticated')
                             chatUser.name = '[Admin] ' + chatUser.name
                             chatUser.admin = true
+                            this.adminSwitch = false
                         }
                         this.$store.dispatch('joinChat', chatUser)
                         //console.log('[onSubmit] Storing cookie')
