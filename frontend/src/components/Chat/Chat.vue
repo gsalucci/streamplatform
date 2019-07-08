@@ -17,18 +17,13 @@
         <v-layout column>
             <v-flex xs12>
                 <v-container ml-2 mt-2 mb-0 mr-0 pa-0 fluid>
-                    <v-layout row justify-start>
-                        <v-icon>chat</v-icon>
-                        <v-layout row justify-center>
-                            <h3 class="headline mb-0">Chat</h3>
-                        </v-layout>
-                        <v-layout row justify-end v-if="chatUser">
-                            <v-btn icon @click="leaveChat">
+                    <v-layout row justify-space-between>
+                        <v-flex><v-icon>chat</v-icon></v-flex>
+                        <v-flex><h3 class="headline mb-0">Chat</h3></v-flex>
+                        <v-flex v-if="chatUser"><v-btn icon @click="leaveChat">
                                 <v-icon>exit_to_app</v-icon>
-                            </v-btn>
-                        </v-layout>
-                    </v-layout>                    
-
+                            </v-btn></v-flex>
+                    </v-layout>
                     <ChatHistory/>
                     <Notification v-if="notification"/>
                     <ChatInput />                    
