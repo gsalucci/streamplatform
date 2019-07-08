@@ -43,7 +43,7 @@ io.on('connection', socket => {
         chatUsers[socket.id] = {id: socket.id, name: data.name, color: data.color, admin: data.admin};
         if(data.admin) console.log('socket: '+ socket.id +' logged in as admin')
         socket.emit('joined_ok',chatUsers[socket.id])
-        socket.broadcast.emit('joined_chat', data)
+        socket.broadcast.emit('joined_chat', chatUsers[socket.id])
     });
 
     socket.on('leave_chat', data => {

@@ -4,26 +4,24 @@ All-in-one RTMP/HLS streaming platform easily deploayble via docker/caprover Inc
 # Deployment
 This application is designed to be deployed via [docker](https://docs.docker.com/install/), using the included `Dockerfile`
 
-First step is to clone the repo and create a file inside `/path/to/repo/frontend` named `.env.production`
+First step is to clone the repo and edit the file inside `/path/to/repo/frontend` named `.env.production`
 
 ```shell
 git clone repoUrl
 cd /path/to/repo/frontend
-touch .env.production
+nano .env.production
 ```
 
-inside this file you will setup the hostname that the client will use, be careful to use the same protocol (http XOR https) for both endpoints.
-Copy/paste the following inside the `.env.production` changing yourHostName to the desired hostname.
+inside this file you will setup the administrator password that the client will use
 
 ```
-VUE_APP_STREAM_BASE=https://yourHostName/hls/
-VUE_APP_SOCKET_IO=https://yourHostName/
+VUE_APP_ADMIN_PASSWORD=SuperSafeAdminPassword
 ```
 
-To run the app, we need to build a docker image
+To run the app, we need to build a docker image giving it a name (only lowercase allowed)
 ```shell
 cd /path/to/repo
-docker build -t aName .
+docker build -t a-name .
 ```
 while it's building we can create and set the permissions to the host folder where our streams will be recorded
 ```shell
@@ -34,7 +32,7 @@ sudo chmod 777 /host/rec/folder
 and then run it mapping the container ports to the host ports and the containers volume to the host folder we just created
 
 ```shell
-docker run -d -p 80:80 -p 1935:1935 -p 8080:8080 -v /host/rec/folder:/var/rec aName
+docker run -d -p 80:80 -p 1935:1935 -p 8080:8080 -v /host/rec/folder:/var/rec a-name
 ```
 
 # Streaming (OBS Studio)
@@ -77,7 +75,7 @@ The backend of this application consists of 3 services:
 
         where $variant$ can be any of the names mentioned above.
 
-    * **Stream recording option**
+    * **Stream recording**
 
         By default NGINX is configured to record your live streams, those will be saved to the containers internal path: `/var/rec`
 
@@ -107,19 +105,23 @@ The backend of this application consists of 3 services:
         spectators: Number
     }
     ```
-    ### Joined Chat
-    Event 'joined_chat' fired when a client joins the chat with the ['join_chat'](#join-chat) message.
+    ### Joined Chat and Joined Ok
+    * `joined_chat` broadcasted when a client joins the chat with the ['join_chat'](#join-chat) message.
 
-    Payload is the _chatUser_ object:
+    * `join_ok` is sent back to the client requesting to join the chat. 
+
+    Payload for both is the _chatUser_ object:
     <a id='chat-user-object'></a>
     ```JavaScript
     {
+        id: Number, //socket.id
         name: String,
-        color: String
+        color: String,
+        admin: Boolean
     }
     ```
     ### Chat Message
-    Event 'chat_message' fired when a client sends a chat message via the ['send_chat_message'](#send-chat-message) event.
+    Event `chat_message` fired when a client sends a chat message via the ['send_chat_message'](#send-chat-message) event.
 
     Payload is the _chatMessage_ object:
     <a id='chat-message-object'></a>
@@ -128,14 +130,16 @@ The backend of this application consists of 3 services:
         id: Number,
         chatUser:
         {
+            id: Number,
             name: String,
-            color: String
+            color: String,
+            admin: Boolean
         },
         message: String
     }
     ```
     ### Left Chat
-    Event 'left_chat' fired when a socket client, that previously joined the chat, disconnects.
+    Event `left_chat` fired when a socket client, that previously joined the chat, disconnects.
 
     Payload is the [_chatUser_](#chat-user-object) object.
 
@@ -143,19 +147,21 @@ The backend of this application consists of 3 services:
 
     <a id='join-chat'></a>
     ### Join Chat
-    Expected event name is: 'join_chat', with the expected payload being a [_chatUser_](#chat-user-object) object.
+    Expected event name is: `join_chat`, with the expected payload being a [_chatUser_](#chat-user-object) object.
 
     <a id='send-chat-message'></a>
     ### Send Chat Message
-    Expected event is 'send_chat_message'
+    Expected event is `send_chat_message`
 
     expected payload:
     ```JavaScript
     {
         chatUser:
         {
+            id: Number,
             name: String,
-            color: String
+            color: String,
+            admin: Boolean
         },
         message: String
     }
