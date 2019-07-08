@@ -22,6 +22,11 @@
                         <v-layout row justify-center>
                             <h3 class="headline mb-0">Chat</h3>
                         </v-layout>
+                        <v-layout row justify-end v-if="chatUser">
+                            <v-btn icon @click="leaveChat">
+                                <v-icon>exit_to_app</v-icon>
+                            </v-btn>
+                        </v-layout>
                     </v-layout>                    
 
                     <ChatHistory/>
@@ -47,8 +52,15 @@
             Notification
         },
         computed: {
-            ...mapGetters(['notification'])
-        }
+            ...mapGetters(['notification','chatUser'])
+        },
+        methods: {
+            leaveChat() {
+                console.log('[leaveChat] deleting cooke')
+                this.$cookies.remove('chatUser')
+                this.$store.dispatch('leaveChat',this.chatUser)
+            }
+        },
         
     }
 </script>

@@ -45,6 +45,14 @@ io.on('connection', socket => {
         socket.broadcast.emit('joined_chat', data)
     });
 
+    socket.on('leave_chat', data => {
+        console.log(data.name + " leaves the chat")
+        if (chatUsers[socket.id] !== undefined){
+            socket.broadcast.emit('left_chat', chatUsers[socket.id])
+        }
+        delete chatUsers[socket.id]        
+    });
+
     socket.on('send_chat_message',data => {
         let id = chatHistory.length + 1
         chatHistory.push({id: id, message: data.message, chatUser: data.chatUser});

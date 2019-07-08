@@ -61,6 +61,11 @@ export default new Vuex.Store({
     joinChat: (context, payload) => {
       socket.emit('join_chat', payload)
     },
+    leaveChat: (context,payload) => {
+      console.log('[store_leaveChat] user: '+JSON.stringify(payload)+' is leaving the chat')
+      socket.emit('leave_chat',payload)
+      context.commit('SET_CHAT_USER',undefined)
+    },
     sendChatMessage: (context,payload) => {
       //console.log('[sendChatMessage] sending message: '+JSON.stringify(payload))
       socket.emit('send_chat_message',payload)

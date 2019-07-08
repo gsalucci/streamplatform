@@ -1,5 +1,5 @@
 <template>
-<video-player class="vjs-big-play-centered" controls :playsinline="true" :options='playerOptions' ref="videoPlayer" @error="onError"/>
+<video-player class="vjs-big-play-centered" controls :playsinline="true" :options='playerOptions' ref="videoPlayer"/>
     <!-- video-js vjs-default-skin  -->
 </template>
 
@@ -36,9 +36,6 @@
             }
         },
         methods: {
-            onError(e) {
-                //console.log('[videoPlayer] error: '+JSON.stringify(e))
-            }
         },
         watch: {
             streamOnline() {
@@ -58,9 +55,6 @@
                                 this.player.play()
                                 clearInterval(interval)
                             }
-                        })
-                        .catch(e => {
-                            //console.log("Awaiting playlist..." + JSON.stringify(e))
                         })
                     },100)
 
