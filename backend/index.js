@@ -40,7 +40,8 @@ io.on('connection', socket => {
 
     socket.on('join_chat', data => {
         console.log("Socket: " + socket.id + " joined the chat with name: " + data.name + " color: "+ data.color)
-        chatUsers[socket.id] = {id: socket.id, name: data.name, color: data.color};
+        chatUsers[socket.id] = {id: socket.id, name: data.name, color: data.color, admin: data.admin};
+        if(data.admin) console.log('socket: '+ socket.id +' logged in as admin')
         socket.emit('joined_ok',chatUsers[socket.id])
         socket.broadcast.emit('joined_chat', data)
     });
