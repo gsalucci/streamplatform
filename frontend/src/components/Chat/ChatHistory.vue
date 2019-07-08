@@ -15,7 +15,11 @@
                     </div>
                 </v-layout>
             </div>
-        <template v-slot:activator="{ on }"></template>        
+        <template v-slot:activator="{ on }">
+        <div>
+            
+        </div>
+        </template>        
        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="selectedMessage">            
             <v-card>
                 <v-list>
