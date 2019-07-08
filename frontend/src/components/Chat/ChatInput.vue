@@ -62,7 +62,7 @@ import {mapGetters} from 'vuex'
                     if (this.chatUser === undefined) {
                         let chatUser = {name: this.input, color: this.getRandomColor()}
                         console.log('[ChatInput_onSubmit] adminSwitch: '+this.adminSwitch + ' typed password: '+ this.password + ' required password: '+process.env.VUE_APP_ADMIN_PASSWORD)
-                        if (this.adminSwitch && this.password == process.env.VUE_APP_ADMIN_PASSWORD){
+                        if (this.adminSwitch && this.password == process.env.VUE_APP_SECRET){
                             console.log('[ChatInput_onSubmit] Admin user authenticated')
                             chatUser = {name: '[Admin] '+this.input, color: this.getRandomColor(),admin: true}
                         }
