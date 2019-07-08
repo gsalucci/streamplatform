@@ -19,7 +19,7 @@
                     v-model="password"
                     :append-icon="showPw ? 'visibility' : 'visibility_off'"
                     :type="showPw ? 'text' : 'password'"
-                    @click:append="showPW = !showPw"
+                    @click:append="showPw = !showPw"
                     placeholder="Password"
                 ></v-text-field>
             </v-flex>
@@ -61,10 +61,10 @@ import {mapGetters} from 'vuex'
                 if (this.input!=''){
                     if (this.chatUser === undefined) {
                         let chatUser = {name: this.input, color: this.getRandomColor()}
-                        console.log('[ChatInput_onSubmit] adminSwitch: '+this.adminSwitch + ' typed password: '+ this.password)
+                        console.log('[ChatInput_onSubmit] adminSwitch: '+this.adminSwitch + ' typed password: '+ this.password + ' required password: '+process.env.VUE_APP_ADMIN_PASSWORD)
                         if (this.adminSwitch && this.password == process.env.VUE_APP_ADMIN_PASSWORD){
                             console.log('[ChatInput_onSubmit] Admin user authenticated')
-                            let chatUser = {name: this.input, color: this.getRandomColor(),admin: true}
+                            chatUser = {name: '[Admin] '+this.input, color: this.getRandomColor(),admin: true}
                         }
                         this.$store.dispatch('joinChat', chatUser)
                         //console.log('[onSubmit] Storing cookie')
