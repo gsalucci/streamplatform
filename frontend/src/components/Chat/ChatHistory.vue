@@ -1,6 +1,6 @@
 <template>
     <v-layout column align-start height="100%" class="chatHistory" id="chatBox">
-        <template v-slot:activator="{ on }" v-if="chatUser.admin">
+        <template v-slot:activator="{ on }">
             <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click="menu = true">
                 <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
                     <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
@@ -16,7 +16,7 @@
                 </v-layout>
             </div>
         </template>        
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>            
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="chatUser.admin">            
             <v-card>
                 <v-list>
                 <v-list-tile avatar>
