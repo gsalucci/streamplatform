@@ -17,6 +17,15 @@
         <v-layout row justify-center v-if="menu">
             <v-dialog v-model="menu" max-width="300" v-if="selectedMessage">            
                 <v-card>
+                    <v-card-title>
+                    <v-icon
+                        large
+                        left
+                    >
+                        supervisor_account
+                    </v-icon>
+                    <span class="title font-weight-light">Admin Panel</span>
+                    </v-card-title>
                     <v-list>
                     <v-list-tile>
                         <v-list-tile-action>
