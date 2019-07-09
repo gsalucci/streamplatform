@@ -29,7 +29,7 @@
                         <v-list-tile-action>
                         <v-switch color="purple" v-model="banUser"></v-switch>
                         </v-list-tile-action>
-                        <v-list-tile-title>Ban User:</v-list-tile-title>
+                        <v-list-tile-title>Ban User: {{selectedMessage.chatUser.name}}</v-list-tile-title>
                     </v-list-tile>
                     </v-list>
 
@@ -78,8 +78,11 @@
             },
             takeAction() {
                 if (this.censor) console.log('censoring message: '+this.selectedMessage.message+' written by: '+this.selectedMessage.chatUser.name)
-                if (this.ban) console.log('banning user'+this.selectedMessage.chatUser.name)
+                if (this.ban) console.log('banning user: '+this.selectedMessage.chatUser.name)
                 this.menu = false
+                this.ban = false
+                this.censor = false
+                this.selectedMessage = undefined
             }
 
         },
