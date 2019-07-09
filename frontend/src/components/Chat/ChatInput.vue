@@ -90,8 +90,12 @@ import {mapGetters} from 'vuex'
             }
         },
         watch:{
-            chatUser(){
-                if (this.chatUser.banned) this.disableInput = true
+            chatUser: function (){
+                console.log('[chatInput] chat user changed!')
+                if (this.chatUser.banned){
+                    console.log('[ChatInput] user is banned disabling input')
+                    this.disableInput = true
+                }
             }
         }
     }

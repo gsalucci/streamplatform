@@ -87,15 +87,13 @@
         methods: {
             showMenu(message) {
                 if (message) {
-                    console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(this.selectedMessage))
+                    console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(this.message))
                     this.selectedMessage = message
                     this.ban = this.selectedMessage.chatUser.banned
                     this.mute = this.selectedMessage.muted
                 }
-                if (this.chatUser.admin){
-                    this.menu = true;
-                    console.log('[ChatHistory_showMenu] opening menu')
-                }
+                if (this.chatUser.admin) this.menu = true;
+
                 
             },
             takeAction() {
@@ -109,8 +107,8 @@
                 }                
 
                 this.menu = false
-                this.banUser = false
-                this.censor = false
+                this.ban = false
+                this.mute = false
                 this.selectedMessage = undefined
             }
 

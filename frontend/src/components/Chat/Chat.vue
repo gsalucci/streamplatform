@@ -52,9 +52,9 @@
         methods: {
             leaveChat() {
                 if(!this.chatUser.banned) {
-                console.log('[leaveChat] deleting cooke')
-                this.$cookies.remove('chatUser')
-                this.$store.dispatch('leaveChat',this.chatUser)
+                    console.log('[leaveChat] deleting cooke')
+                    this.$cookies.remove('chatUser')
+                    this.$store.dispatch('leaveChat',this.chatUser)
                 }
             }
         },
