@@ -99,11 +99,14 @@
                 
             },
             takeAction() {
-                this.mute ? this.selectedMessage.muted = true : this.selectedMessage.muted = false
-                this.$store.dispatch('muteMessage',this.selectedMessage)
-
-                this.ban ? this.selectedMessage.chatUser.banned = true : this.selectedMessage.chatUser.banned = false
-                this.$store.dispatch('banUser',this.selectedMessage.chatUser)
+                if (this.mute != this.selectedMessage.muted) {
+                    this.selected.message.muted = this.mute
+                    this.$store.dispatch('muteMessage',this.selectedMessage)
+                }
+                if (this.ban != this.selectedMessage.chatUser.banned) {
+                    this.selectedMessage.chatUser.banned = this.banned
+                    this.$store.dispatch('banUser',this.selectedMessage.chatUser)
+                }                
 
                 this.menu = false
                 this.banUser = false

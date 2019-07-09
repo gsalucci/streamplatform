@@ -63,9 +63,8 @@ export default new Vuex.Store({
         newValue: i.e.
       }
       */
-      let i = state.chatHistory.indexOf(state.chatHistory.find(m=> m.id == payload.id))
-      console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[i][payload.prop])
-      state.chatHistory[i][payload.prop] = payload.newValue
+      console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[payload.id][payload.prop])
+      state.chatHistory[payload.id][payload.prop] = payload.newValue
     },
     CHANGE_CHAT_USER_PROPERTY: (state, payload) => {
       /*
@@ -75,9 +74,8 @@ export default new Vuex.Store({
         newValue: i.e.
       }
       */
-      let i = state.chatHistory.indexOf(state.chatHistory.find(m=> m.id == payload.id))
-      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[i].chatUser[payload.prop])
-      state.chatHistory[i].chatUser[payload.prop] = payload.newValue
+      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[payload.id].chatUser[payload.prop])
+      state.chatHistory[payload.id].chatUser[payload.prop] = payload.newValue
     }
 
   },
@@ -109,7 +107,7 @@ export default new Vuex.Store({
     socket_mutedMessage: (context, payload) => {
       console.log('[socket_mutedMessage] applying muted status: '+payload.muted+' to message id: '+payload.id)
       context.state.chatHistory.forEach(m => {
-        if (m.id == payload.id) m.muted = payload.muted
+        if (m.id == payload.id) context.commit('CHANGE_MESSAGE_PROPERTY', {id: m.id, prop:'muted',newValue: payload.muted})
       })
     },
     joinChat: (context, payload) => {
@@ -148,6 +146,12 @@ export default new Vuex.Store({
       console.log('[banUser] applying banned status: '+ payload.banned + ' to user id: ' + payload.id)
       socket.emit('ban_user',payload)
       context.commit('SET_NOTIFICATION',{type:'banned-user',data: payload})
+      context.state.chatHistory.forEach(m => {
+        if(m.chatUser.id == payload.id) {
+          context.commit('CHANGE_CHAT_USER_PROPERTY',{id: m.id,prop:'banned',newValue:payload.banned})
+        }
+      })
+
     },
     muteMessage: (context, payload) => {
       console.log('[muteMessage] applying muted status: '+ payload.muted + ' to message id: ' + payload.id)
