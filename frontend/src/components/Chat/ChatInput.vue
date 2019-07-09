@@ -62,8 +62,11 @@ import {mapGetters} from 'vuex'
                         console.log('ChatInput_disableInput disabling input and setting cookie' )
                         this.$cookies.set('chatUser',this.chatUser)
                         return true
-                        }
-                    else return false
+                    }
+                    else {
+                        this.$cookies.set('chatUser',this.chatUser)
+                        return false
+                    }
                 }
             }
         },
