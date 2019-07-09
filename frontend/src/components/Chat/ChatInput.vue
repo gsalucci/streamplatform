@@ -2,7 +2,14 @@
     <v-layout column>
         <v-layout row align-center>
             <v-flex xs11>
-                <v-text-field v-model="input" :error="validationError" @input="validationError = false" :placeholder="placeholderText" @keyup.enter="onSubmit" clearable hide-details :disabled="disableInput"/>
+                <v-text-field
+                v-model="input"
+                :error="validationError"
+                @input="validationError = false"
+                :placeholder="placeholderText"
+                @keyup.enter="onSubmit"
+                clearable hide-details
+                :disabled="disableInput"/>
             </v-flex>
             <v-flex class="mt-4 ml-0 mr-4">
                 <v-btn flat icon  @click="onSubmit"><v-icon>send</v-icon></v-btn>

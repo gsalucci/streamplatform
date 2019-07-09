@@ -43,7 +43,7 @@ export default new Vuex.Store({
       state.chatUser = payload
     },
     SET_CHAT_USER_PROP: (state, payload) => {
-      console.log("[SET_CHAT_USER_PROP] setting chatUser\'s" + payload.prop + " status to: "+payload.newValue + " was: "+ state.chatUser[payload.prop])
+      console.log("[SET_CHAT_USER_PROP] setting chatUser's " + payload.prop + " status to: "+payload.newValue + " was: "+ state.chatUser[payload.prop])
       state.chatUser[payload.prop] = payload.newValue
     },
     SET_HOSTNAME: (state, payload) => {
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     SET_VODS: (state, payload) => {
       //console.log("[SET_VODS] setting vods to: "+JSON.stringify(payload))
       state.vods = payload.sort((a,b)=>{
-        return b.mtime-a.mtime
+        return new Date(b.mtime) - new Date(a.mtime)
       })
     },
     PLAY_VOD: (state,payload) => {
@@ -106,6 +106,7 @@ export default new Vuex.Store({
           context.commit('CHANGE_CHAT_USER_PROPERTY',{id: m.id,prop:'banned',newValue:payload.banned})
         }
       })
+      console.log('[socket_bannedUser] own id: '+ context.state.chatUser.id + ' banned user id: '+payload.id)
       if (payload.id == context.state.chatUser.id) context.commit('SET_CHAT_USER_PROP',{prop:'banned',newValue: payload.banned})
 
     },
