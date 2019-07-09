@@ -76,13 +76,12 @@
                 }
                 
             },
-            methods: {
-                takeAction() {
-                    if (this.censor) console.log('censoring message: '+this.selectedMessage.message+' written by: '+this.selectedMessage.chatUser.name)
-                    if (this.ban) console.log('banning user'+this.selectedMessage.chatUser.name)
-                    this.menu = false
-                }
-            },
+            takeAction() {
+                if (this.censor) console.log('censoring message: '+this.selectedMessage.message+' written by: '+this.selectedMessage.chatUser.name)
+                if (this.ban) console.log('banning user'+this.selectedMessage.chatUser.name)
+                this.menu = false
+            }
+
         },
         updated() {
             this.chatBox = document.getElementById('chatBox')
