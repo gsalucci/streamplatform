@@ -100,11 +100,11 @@
             },
             takeAction() {
                 if (this.mute != this.selectedMessage.muted) {
-                    this.selected.message.muted = this.mute
+                    this.selectedMessage.muted = this.mute
                     this.$store.dispatch('muteMessage',this.selectedMessage)
                 }
                 if (this.ban != this.selectedMessage.chatUser.banned) {
-                    this.selectedMessage.chatUser.banned = this.banned
+                    this.selectedMessage.chatUser.banned = this.ban
                     this.$store.dispatch('banUser',this.selectedMessage.chatUser)
                 }                
 

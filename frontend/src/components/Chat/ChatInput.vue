@@ -2,7 +2,7 @@
     <v-layout column>
         <v-layout row align-center>
             <v-flex xs11>
-                <v-text-field v-model="input" :error="validationError" @input="validationError = false" :placeholder="placeholderText" @keyup.enter="onSubmit" clearable hide-details/>
+                <v-text-field v-model="input" :error="validationError" @input="validationError = false" :placeholder="placeholderText" @keyup.enter="onSubmit" clearable hide-details :disabled="disableInput"/>
             </v-flex>
             <v-flex class="mt-4 ml-0 mr-4">
                 <v-btn flat icon  @click="onSubmit"><v-icon>send</v-icon></v-btn>
@@ -37,7 +37,8 @@ import {mapGetters} from 'vuex'
                 validationError: false,
                 adminSwitch: false,
                 showPw: false,
-                password:''
+                password:'',
+                disableInput: false
             }
         },
         computed: {
@@ -86,6 +87,11 @@ import {mapGetters} from 'vuex'
             if (userFromCookie){
                 //console.log('[mounted] user found')
                 this.$store.dispatch('joinChat', userFromCookie)
+            }
+        },
+        watch:{
+            chatUser(){
+                if (this.chatUser.banned) this.disableInput = true
             }
         }
     }
