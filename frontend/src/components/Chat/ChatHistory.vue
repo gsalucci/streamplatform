@@ -15,33 +15,21 @@
             </v-layout>
         </div>
         <v-layout row justify-center v-if="menu">
-            <v-dialog v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="selectedMessage">            
+            <v-dialog v-model="menu" max-width="300" v-if="selectedMessage">            
                 <v-card>
-                    <v-list>
-                    <v-list-tile>
-                        Actions for: 
-                        <v-list-tile-content>
-                            <v-list-tile-title>{{selectedMessage.chatUser.name}}</v-list-tile-title>
-                            <v-list-tile-sub-title>{{selectedMessage.message}}</v-list-tile-sub-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                    </v-list>
-
-                    <v-divider></v-divider>
-
                     <v-list>
                     <v-list-tile>
                         <v-list-tile-action>
                         <v-switch color="purple" v-model="censor"></v-switch>
                         </v-list-tile-action>
-                        <v-list-tile-title>Censor message</v-list-tile-title>
+                        <v-list-tile-title>Censor message: {{selectedMessage.message}}</v-list-tile-title>
                     </v-list-tile>
 
                     <v-list-tile>
                         <v-list-tile-action>
                         <v-switch color="purple" v-model="banUser"></v-switch>
                         </v-list-tile-action>
-                        <v-list-tile-title>Ban User</v-list-tile-title>
+                        <v-list-tile-title>Ban User:</v-list-tile-title>
                     </v-list-tile>
                     </v-list>
 
@@ -49,7 +37,7 @@
                     <v-spacer></v-spacer>
 
                     <v-btn flat @click="menu = false">Cancel</v-btn>
-                    <v-btn color="primary" flat @click="menu = false">Apply</v-btn>
+                    <v-btn color="primary" flat @click="takeAction()">Apply</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -87,7 +75,14 @@
                     console.log('[ChatHistory_showMenu] opening menu')
                 }
                 
-            }
+            },
+            methods: {
+                takeAction() {
+                    if (this.censor) console.log('censoring message: '+this.selectedMessage.message+' written by: '+this.selectedMessage.chatUser.name)
+                    if (this.ban) console.log('banning user'+this.selectedMessage.chatUser.name)
+                    this.menu = false
+                }
+            },
         },
         updated() {
             this.chatBox = document.getElementById('chatBox')
