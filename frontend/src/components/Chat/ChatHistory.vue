@@ -15,17 +15,16 @@
                     </div>
                 </v-layout>
             </div>
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on }"/>
         <div>
 
-        </div>
-        </template>        
+        </div>       
        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="selectedMessage">            
             <v-card>
                 <v-list>
                 <v-list-tile>
+                    Actions for:
                     <v-list-tile-content>
-                        Actions for:
                         <v-list-tile-title>{{selectedMessage.chatUser.name}}</v-list-tile-title>
                         <v-list-tile-sub-title>{{selectedMessage.message}}</v-list-tile-sub-title>
                     </v-list-tile-content>
