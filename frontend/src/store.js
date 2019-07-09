@@ -106,7 +106,7 @@ export default new Vuex.Store({
     },
     socket_mutedMessage: (context, payload) => {
       console.log('[socket_mutedMessage] applying muted status: '+payload.muted+' to message id: '+payload.id)
-      context.commit('CHANGE_MESSAGE_PROPERTY', {id: payload, prop:'muted', newValue: payload.muted})
+      context.commit('CHANGE_MESSAGE_PROPERTY', {id: payload.id, prop:'muted', newValue: payload.muted})
     },
     joinChat: (context, payload) => {
       socket.emit('join_chat', payload)
