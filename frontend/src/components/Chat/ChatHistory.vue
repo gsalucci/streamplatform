@@ -21,7 +21,8 @@
             </v-layout>
         </div>
         <v-layout row justify-center v-if="menu">
-            <v-dialog v-model="menu" max-width="300" v-if="selectedMessage">            
+            <v-dialog v-model="menu" v-if="selectedMessage"> 
+                <!-- max-width="300"            -->
                 <v-card>
                     <v-card-title>
                     <v-icon

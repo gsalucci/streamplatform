@@ -63,8 +63,9 @@ export default new Vuex.Store({
         newValue: i.e.
       }
       */
-      console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[payload.id][payload.prop])
-      state.chatHistory[payload.id][payload.prop] = payload.newValue
+      let i = state.chatHistory.indexOf(state.chatHistory.find(m=> m.id == payload.id))
+      console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[i][payload.prop])
+      state.chatHistory[i][payload.prop] = payload.newValue
     },
     CHANGE_CHAT_USER_PROPERTY: (state, payload) => {
       /*
@@ -74,8 +75,9 @@ export default new Vuex.Store({
         newValue: i.e.
       }
       */
-      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[payload.id].chatUser[payload.prop])
-      state.chatHistory[payload.id].chatUser[payload.prop] = payload.newValue
+      let i = state.chatHistory.indexOf(state.chatHistory.find(m=> m.id == payload.id))
+      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[i].chatUser[payload.prop])
+      state.chatHistory[i].chatUser[payload.prop] = payload.newValue
     }
 
   },
