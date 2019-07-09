@@ -61,7 +61,7 @@ import {mapGetters} from 'vuex'
             onSubmit() {
                 if (this.input!=''){
                     if (this.chatUser === undefined) {
-                        let chatUser = {name: this.input, color: this.getRandomColor(), admin: false}
+                        let chatUser = {name: this.input, color: this.getRandomColor(), admin: false, banned:false}
                         if (this.adminSwitch && this.password == process.env.VUE_APP_ADMIN_PASSWORD){
                             console.log('[ChatInput_onSubmit] Admin user authenticated')
                             chatUser.name = '[Admin] ' + chatUser.name
@@ -73,7 +73,7 @@ import {mapGetters} from 'vuex'
                         this.$cookies.set('chatUser',chatUser)
                         this.input = ''
                     } else {
-                        this.$store.dispatch('sendChatMessage', {chatUser: this.chatUser,message: this.input})
+                        this.$store.dispatch('sendChatMessage', {chatUser: this.chatUser,message: this.input, muted: false})
                         this.input = ''
                     }
                 }

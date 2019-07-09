@@ -54,23 +54,33 @@ export default new Vuex.Store({
     },
     PLAY_VOD: (state,payload) => {
       state.vod = payload
+    },
+    CHANGE_MESSAGE_PROPERTY: (state, payload) => {
+      /*
+      payload: {
+        id: massage-to-be-modified's id
+        prop: property to modify
+        newValue: i.e.
+      }
+      */
+      console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ status.chatHistory[payload.id][payload.prop])
+      state.chatHistory[payload.id][payload.prop] = payload.newValue
+    },
+    CHANGE_CHAT_USER_PROPERTY: (state, payload) => {
+      /*
+      payload: {
+        id: massage-to-be-modified's id
+        prop: property to modify
+        newValue: i.e.
+      }
+      */
+      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ status.chatHistory[payload.id].chatUser[payload.prop])
+      state.chatHistory[payload.id].chatUser[payload.prop] = payload.newValue
     }
 
   },
   actions: {
-    joinChat: (context, payload) => {
-      socket.emit('join_chat', payload)
-    },
-    leaveChat: (context,payload) => {
-      console.log('[store_leaveChat] user: '+JSON.stringify(payload)+' is leaving the chat')
-      socket.emit('leave_chat',payload)
-      context.commit('SET_CHAT_USER',undefined)
-    },
-    sendChatMessage: (context,payload) => {
-      //console.log('[sendChatMessage] sending message: '+JSON.stringify(payload))
-      socket.emit('send_chat_message',payload)
-      //context.commit('SOCKET_CHAT_MESSAGE', payload)
-    },
+
     socket_joinedChat: (context, payload) => {
       //console.log('[socket_joinedChat] payload: '+JSON.stringify(payload))
       context.commit('SET_NOTIFICATION', {type: 'joined-chat', data: payload})
@@ -83,6 +93,35 @@ export default new Vuex.Store({
       //console.log('[socket_joinOk] Chat joined confirmation received: '+JSON.stringify(payload))
       context.commit('SET_NOTIFICATION', {type: 'joined-chat', data: {name:'You', color: payload.color}})
       context.commit('SET_CHAT_USER', payload)
+    },
+    socket_bannedUser: (context, payload) => {
+      console.log('[socket_bannedUser] applying banned status: '+payload.banned+' to all messages by user: '+payload.id)
+      context.commit('SET_NOTIFICATION',{type:'banned-user',data: payload})
+      context.state.chatHistory.forEach(m => {
+        if(m.chatUser.id == payload.id) {
+          context.commit('CHANGE_CHAT_USER_PROPERTY',{id: m.id,prop:'banned',newValue:payload.banned})
+        }
+      })
+
+    },
+    socket_mutedMessage: (context, payload) => {
+      console.log('[socket_mutedMessage] applying muted status: '+payload.muted+' to message id: '+payload.id)
+      context.state.chatHistory.forEach(m => {
+        if (m.id == payload.id) m.muted = payload.muted
+      })
+    },
+    joinChat: (context, payload) => {
+      socket.emit('join_chat', payload)
+    },
+    leaveChat: (context,payload) => {
+      console.log('[store_leaveChat] user: '+JSON.stringify(payload)+' is leaving the chat')
+      socket.emit('leave_chat',payload)
+      context.commit('SET_CHAT_USER',undefined)
+    },
+    sendChatMessage: (context,payload) => {
+      //console.log('[sendChatMessage] sending message: '+JSON.stringify(payload))
+      socket.emit('send_chat_message',payload)
+      //context.commit('SOCKET_CHAT_MESSAGE', payload)
     },
     setHostname: (context, payload) => {
       context.commit('SET_HOSTNAME',payload)
@@ -102,6 +141,16 @@ export default new Vuex.Store({
     playVod: (context,payload) => {
       //console.log('[playVod] playing: '+payload)
       context.commit('PLAY_VOD',payload)
+    },
+    banUser: (context, payload) => {
+      console.log('[banUser] applying banned status: '+ payload.banned + ' to user id: ' + payload.id)
+      socket.emit('ban_user',payload)
+      context.commit('SET_NOTIFICATION',{type:'banned-user',data: payload})
+    },
+    muteMessage: (context, payload) => {
+      console.log('[muteMessage] applying muted status: '+ payload.muted + ' to message id: ' + payload.id)
+      socket.emit('mute_message',payload)
+      context.commit('CHANGE_MESSAGE_PROPERTY',{id:payload.id, prop:'muted',newValue:payload.muted})
     }
 
 

@@ -40,7 +40,7 @@ io.on('connection', socket => {
 
     socket.on('join_chat', data => {
         console.log("Socket: " + socket.id + " joined the chat with name: " + data.name + " color: "+ data.color)
-        chatUsers[socket.id] = {id: socket.id, name: data.name, color: data.color, admin: data.admin};
+        chatUsers[socket.id] = {id: socket.id, name: data.name, color: data.color, admin: data.admin,banned:data.banned};
         if(data.admin) console.log('socket: '+ socket.id +' logged in as admin')
         socket.emit('joined_ok',chatUsers[socket.id])
         socket.broadcast.emit('joined_chat', chatUsers[socket.id])
@@ -55,14 +55,26 @@ io.on('connection', socket => {
     });
 
     socket.on('send_chat_message',data => {
-        let id = chatHistory.length + 1
-        chatHistory.push({id: id, message: data.message, chatUser: data.chatUser});
-        console.log("[" + data.chatUser.name + "] " + "says: " + data.message )
+        let id = chatHistory.length
+        chatHistory.push({id: id, message: data.message, chatUser: data.chatUser, muted: data.muted});
+        console.log("["+id+"][" + data.chatUser.name + "] " + "says: " + data.message )
         Object.keys(sockets).forEach(k => {
             sockets[k].emit('chat_message',chatHistory[chatHistory.length-1]);
         });
     });
 
+    socket.on('ban_user',data => {
+        console.log('Setting user: '+data.name+' banned status to: '+ data.banned)
+        chatUsers[data.id].banned = data.banned
+        socket.emit('banned_user',chatUsers[data.id])
+    })
+
+    socket.on('mute_message', data => {
+        console.log('Setting message: '+data.id+' muted status to: '+data.muted)
+        chatHistory[data.id].muted = data.muted
+        socket.emit('muted_message',chatHistory[data.id])
+
+    })
 });
 
 //inject VueApp

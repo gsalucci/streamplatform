@@ -4,11 +4,17 @@
             <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
                 <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
                     <v-layout column justify-start align-start text-xs-left>
-                        <div class="font-weight-bold" v-bind:style="{ color: message.chatUser.color}" v-if="message.chatUser !== chatUser">
+                        <div class="font-weight-bold" v-bind:style="{ color: message.chatUser.color}" v-if="!message.chatUser.banned">
                             {{message.chatUser.name}}
                         </div>
-                        <div>
+                        <div class="font-weight-bold" v-bind:style="{ color: message.chatUser.color}" v-if="message.chatUser.banned">
+                            *Banned*
+                        </div>
+                        <div v-if="!message.muted && !message.chatUser.banned">
                             {{message.message}}
+                        </div>
+                        <div v-if="message.muted || message.chatUser.banned">
+                            *MUTED*
                         </div>
                     </v-layout>
                 </div>
@@ -29,8 +35,10 @@
                     <v-list>
                     <v-list-tile>
                         <v-list-tile-action>
-                        <v-icon>voice_over_off</v-icon>
-                        <v-switch color="purple" v-model="censor"></v-switch>
+                            <v-layout row justify-start>
+                                <v-icon>voice_over_off</v-icon>
+                                <v-switch color="purple" v-model="mute"></v-switch>
+                            </v-layout>
                         </v-list-tile-action>
                         <v-list-tile-title>Censor message: {{selectedMessage.message}}</v-list-tile-title>
                     </v-list-tile>
@@ -38,7 +46,7 @@
                     <v-list-tile>
                         <v-list-tile-action>
                         <v-icon>gavel</v-icon>
-                        <v-switch color="purple" v-model="banUser"></v-switch>
+                        <v-switch color="purple" v-model="ban"></v-switch>
                         </v-list-tile-action>
                         <v-list-tile-title>Ban User: {{selectedMessage.chatUser.name}}</v-list-tile-title>
                     </v-list-tile>
@@ -63,9 +71,9 @@
             return {
                 chatBox: undefined,
                 menu: false,
+                mute: false,
+                ban: false,
                 selectedMessage: undefined,
-                censor: false,
-                banUser: false,
             }
         },
         components: {},
@@ -79,7 +87,9 @@
             showMenu(message) {
                 if (message) {
                     console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(this.selectedMessage))
-                    this.selectedMessage = message                    
+                    this.selectedMessage = message
+                    this.ban = this.selectedMessage.chatUser.banned
+                    this.mute = this.selectedMessage.muted
                 }
                 if (this.chatUser.admin){
                     this.menu = true;
@@ -88,8 +98,22 @@
                 
             },
             takeAction() {
-                if (this.censor) console.log('censoring message: '+this.selectedMessage.message+' written by: '+this.selectedMessage.chatUser.name)
-                if (this.banUser) console.log('banning user: '+this.selectedMessage.chatUser.name)
+                if (this.mute) {
+                    this.selectedMessage.muted = true
+                    this.store.dispatch('muteMessage',selectedMessage)
+                }
+                else {
+                    this.selectedMessage.muted = false
+                    this.store.dispatch('muteMessage',selectedMessage)                    
+                }
+                if (this.ban){
+                    this.selectedMessage.chatUser.banned = true
+                    this.store.dispatch('banUser',this.selectedMessage.chatUser)
+                }
+                else {
+                    this.selectedMessage.chatUser.banned = false
+                    this.store.dispatch('banUser',this.selectedMessage.chatUser)
+                }
                 this.menu = false
                 this.banUser = false
                 this.censor = false

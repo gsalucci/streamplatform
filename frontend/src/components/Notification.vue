@@ -15,6 +15,9 @@
                             return this.notification.data.name+' joined the chat'
                         case 'left-chat':
                             return this.notification.data.name+' left the chat'
+                        case 'banned-user':
+                            if (this.notification.data.banned) return 'User: '+this.notification.data.name+ ' has been banned.'
+                            else return 'Ban for user: '+this.notification.data.name+ ' has been lifted.'
                     }
 
                 }

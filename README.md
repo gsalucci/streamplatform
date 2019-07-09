@@ -117,7 +117,8 @@ The backend of this application consists of 3 services:
         id: Number, //socket.id
         name: String,
         color: String,
-        admin: Boolean
+        admin: Boolean,
+        banned: Boolean
     }
     ```
     ### Chat Message
@@ -135,7 +136,8 @@ The backend of this application consists of 3 services:
             color: String,
             admin: Boolean
         },
-        message: String
+        message: String,
+        muted: Boolean
     }
     ```
     ### Left Chat
@@ -153,16 +155,4 @@ The backend of this application consists of 3 services:
     ### Send Chat Message
     Expected event is `send_chat_message`
 
-    expected payload:
-    ```JavaScript
-    {
-        chatUser:
-        {
-            id: Number,
-            name: String,
-            color: String,
-            admin: Boolean
-        },
-        message: String
-    }
-    ```
+    expected payload is a [chatMessage](#chat-message-object)
