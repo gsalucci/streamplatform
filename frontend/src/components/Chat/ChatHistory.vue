@@ -98,22 +98,12 @@
                 
             },
             takeAction() {
-                if (this.mute) {
-                    this.selectedMessage.muted = true
-                    this.store.dispatch('muteMessage',this.selectedMessage)
-                }
-                else {
-                    this.selectedMessage.muted = false
-                    this.store.dispatch('muteMessage',this.selectedMessage)                    
-                }
-                if (this.ban){
-                    this.selectedMessage.chatUser.banned = true
-                    this.store.dispatch('banUser',this.selectedMessage.chatUser)
-                }
-                else {
-                    this.selectedMessage.chatUser.banned = false
-                    this.store.dispatch('banUser',this.selectedMessage.chatUser)
-                }
+                this.mute ? this.selectedMessage.muted = true : this.selectedMessage.muted = false
+                this.$store.dispatch('muteMessage',this.selectedMessage)
+
+                this.ban ? this.selectedMessage.chatUser.banned = true : this.selectedMessage.chatUser.banned = false
+                this.$store.dispatch('banUser',this.selectedMessage.chatUser)
+
                 this.menu = false
                 this.banUser = false
                 this.censor = false
