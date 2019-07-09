@@ -100,11 +100,11 @@
             takeAction() {
                 if (this.mute) {
                     this.selectedMessage.muted = true
-                    this.store.dispatch('muteMessage',selectedMessage)
+                    this.store.dispatch('muteMessage',this.selectedMessage)
                 }
                 else {
                     this.selectedMessage.muted = false
-                    this.store.dispatch('muteMessage',selectedMessage)                    
+                    this.store.dispatch('muteMessage',this.selectedMessage)                    
                 }
                 if (this.ban){
                     this.selectedMessage.chatUser.banned = true
