@@ -29,6 +29,7 @@
                     <v-list>
                     <v-list-tile>
                         <v-list-tile-action>
+                        <v-icon>voice_over_off</v-icon>
                         <v-switch color="purple" v-model="censor"></v-switch>
                         </v-list-tile-action>
                         <v-list-tile-title>Censor message: {{selectedMessage.message}}</v-list-tile-title>
@@ -36,6 +37,7 @@
 
                     <v-list-tile>
                         <v-list-tile-action>
+                        <v-icon>gavel</v-icon>
                         <v-switch color="purple" v-model="banUser"></v-switch>
                         </v-list-tile-action>
                         <v-list-tile-title>Ban User: {{selectedMessage.chatUser.name}}</v-list-tile-title>
@@ -87,9 +89,9 @@
             },
             takeAction() {
                 if (this.censor) console.log('censoring message: '+this.selectedMessage.message+' written by: '+this.selectedMessage.chatUser.name)
-                if (this.ban) console.log('banning user: '+this.selectedMessage.chatUser.name)
+                if (this.banUser) console.log('banning user: '+this.selectedMessage.chatUser.name)
                 this.menu = false
-                this.ban = false
+                this.banUser = false
                 this.censor = false
                 this.selectedMessage = undefined
             }
