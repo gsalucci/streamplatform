@@ -35,35 +35,25 @@
                     </v-card-title>
                     <v-list>
                     <v-list-tile>
-                        <v-list-tile-title>
-                            <v-layout row justify-start align-center>
-                                <v-flex class="ma-1">
-                                    <v-icon>voice_over_off</v-icon>
-                                </v-flex>
-                                <v-flex class="ma-1">
-                                    <v-switch color="purple" v-model="mute"></v-switch>
-                                </v-flex>
-                                <v-flex>
-                                    mute: {{selectedMessage.message}}
-                                </v-flex>
-                            </v-layout>
-                        </v-list-tile-title>  
+                        <v-list-tile-action>
+                            <v-switch color="purple" v-model="mute"></v-switch>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>
+                                mute: {{selectedMessage.message}}
+                            </v-list-tile-title>
+                        </v-list-tile-content>  
                     </v-list-tile>
 
                     <v-list-tile>
-                        <v-list-tile-title>
-                            <v-layout row justify-start align-center>
-                                <v-flex class="ma-1">
-                                    <v-icon>gavel</v-icon>
-                                </v-flex>
-                                <v-flex class="ma-1">
-                                    <v-switch color="purple" v-model="ban"></v-switch>
-                                </v-flex>
-                                <v-flex>
-                                    ban: {{selectedMessage.chatUser.name}}
-                                </v-flex>
-                            </v-layout>
-                        </v-list-tile-title>
+                        <v-list-tile-action>
+                            <v-switch color="purple" v-model="ban"></v-switch>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>
+                                ban: {{selectedMessage.chatUser.name}}
+                            </v-list-tile-title>
+                        </v-list-tile-content>
                     </v-list-tile>
                     </v-list>
 
@@ -71,7 +61,7 @@
                     <v-spacer></v-spacer>
 
                     <v-btn flat @click="menu = false">Cancel</v-btn>
-                    <v-btn color="primary" flat @click="takeAction()">Apply</v-btn>
+                    <v-btn flat @click="takeAction()">Apply</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -101,7 +91,7 @@
         methods: {
             showMenu(message) {
                 if (message) {
-                    console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(this.message))
+                    console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(message))
                     this.selectedMessage = message
                     this.ban = this.selectedMessage.chatUser.banned
                     this.mute = this.selectedMessage.muted
