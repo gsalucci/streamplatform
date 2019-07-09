@@ -37,15 +37,15 @@
                     <v-list-tile>
                         <v-list-tile-action>
                             <v-layout row justify-start align-center>
-                                <v-flex>
+                                <v-flex class="ma-1">
                                     <v-icon>voice_over_off</v-icon>
                                 </v-flex>
-                                <v-flex>
+                                <v-flex class="ma-1">
                                     <v-switch color="purple" v-model="mute"></v-switch>
                                 </v-flex>
                             </v-layout>
                         </v-list-tile-action>
-                        <v-list-tile-title>{{selectedMessage.message}}</v-list-tile-title>
+                        <v-list-tile-title>mute: {{selectedMessage.message}}</v-list-tile-title>
                     </v-list-tile>
 
                     <v-list-tile>
@@ -59,7 +59,7 @@
                                 </v-flex>
                             </v-layout>
                         </v-list-tile-action>
-                        <v-list-tile-title>{{selectedMessage.chatUser.name}}</v-list-tile-title>
+                        <v-list-tile-title>ban: {{selectedMessage.chatUser.name}}</v-list-tile-title>
                     </v-list-tile>
                     </v-list>
 
