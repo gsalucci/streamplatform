@@ -43,7 +43,7 @@ export default new Vuex.Store({
       state.chatUser = payload
     },
     SET_CHAT_USER_PROP: (state, payload) => {
-      console.log("[SET_CHAT_USER_PROP] setting chatUser's " + payload.prop + " status to: "+payload.newValue + " was: "+ state.chatUser[payload.prop])
+      console.log("[SET_CHAT_USER_PROP] setting chatUser's " + payload.prop + " status to: "+payload.newValue + "; was: "+ state.chatUser[payload.prop])
       state.chatUser[payload.prop] = payload.newValue
     },
     SET_HOSTNAME: (state, payload) => {
@@ -67,7 +67,7 @@ export default new Vuex.Store({
         newValue: i.e.
       }
       */
-      console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[payload.id][payload.prop])
+      console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + '; was: '+ state.chatHistory[payload.id][payload.prop])
       state.chatHistory[payload.id][payload.prop] = payload.newValue
     },
     CHANGE_CHAT_USER_PROPERTY: (state, payload) => {
@@ -78,7 +78,7 @@ export default new Vuex.Store({
         newValue: i.e.
       }
       */
-      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + ' was: '+ state.chatHistory[payload.id].chatUser[payload.prop])
+      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + '; was: '+ state.chatHistory[payload.id].chatUser[payload.prop])
       state.chatHistory[payload.id].chatUser[payload.prop] = payload.newValue
     }
 

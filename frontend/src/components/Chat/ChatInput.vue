@@ -45,7 +45,6 @@ import {mapGetters} from 'vuex'
                 adminSwitch: false,
                 showPw: false,
                 password:'',
-                disableInput: false
             }
         },
         computed: {
@@ -55,6 +54,17 @@ import {mapGetters} from 'vuex'
             placeholderText(){
                 if (this.chatUser === undefined) return 'Choose a name...'
                 else return 'Message...'
+            },
+            disableInput(){
+                if(this.chatUser === undefined) return false
+                else {
+                    if(this.chatUser.banned) {
+                        console.log('ChatInput_disableInput disabling input and setting cookie' )
+                        this.$cookies.set('chatUser',this.chatUser)
+                        return true
+                        }
+                    else return false
+                }
             }
         },
         methods: {
@@ -96,15 +106,6 @@ import {mapGetters} from 'vuex'
                 this.$store.dispatch('joinChat', userFromCookie)
             }
         },
-        watch:{
-            chatUser: function (){
-                console.log('[chatInput] chat user changed!')
-                if (this.chatUser.banned){
-                    console.log('[ChatInput] user is banned disabling input')
-                    this.disableInput = true
-                }
-            }
-        }
     }
 </script>
 
