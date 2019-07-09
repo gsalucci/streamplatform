@@ -36,20 +36,30 @@
                     <v-list>
                     <v-list-tile>
                         <v-list-tile-action>
-                            <v-layout row justify-start>
-                                <v-icon>voice_over_off</v-icon>
-                                <v-switch color="purple" v-model="mute"></v-switch>
+                            <v-layout row justify-start align-center>
+                                <v-flex>
+                                    <v-icon>voice_over_off</v-icon>
+                                </v-flex>
+                                <v-flex>
+                                    <v-switch color="purple" v-model="mute"></v-switch>
+                                </v-flex>
                             </v-layout>
                         </v-list-tile-action>
-                        <v-list-tile-title>Censor message: {{selectedMessage.message}}</v-list-tile-title>
+                        <v-list-tile-title>{{selectedMessage.message}}</v-list-tile-title>
                     </v-list-tile>
 
                     <v-list-tile>
                         <v-list-tile-action>
-                        <v-icon>gavel</v-icon>
-                        <v-switch color="purple" v-model="ban"></v-switch>
+                            <v-layout row justify-start align-center>
+                                <v-flex>
+                                    <v-icon>gavel</v-icon>
+                                </v-flex>
+                                <v-flex>
+                                    <v-switch color="purple" v-model="ban"></v-switch>
+                                </v-flex>
+                            </v-layout>
                         </v-list-tile-action>
-                        <v-list-tile-title>Ban User: {{selectedMessage.chatUser.name}}</v-list-tile-title>
+                        <v-list-tile-title>{{selectedMessage.chatUser.name}}</v-list-tile-title>
                     </v-list-tile>
                     </v-list>
 
