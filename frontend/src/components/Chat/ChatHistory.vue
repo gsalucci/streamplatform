@@ -1,58 +1,59 @@
 <template>
     <v-layout column align-start height="100%" class="chatHistory" id="chatBox">
-        
-            <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click.stop="showMenu(message)">
-                <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
-                    <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
-                        <v-layout column justify-start align-start text-xs-left>
-                            <div class="font-weight-bold" v-bind:style="{ color: message.chatUser.color}" v-if="message.chatUser !== chatUser">
-                                {{message.chatUser.name}}
-                            </div>
-                            <div>
-                                {{message.message}}
-                            </div>
-                        </v-layout>
-                    </div>
-                </v-layout>
-            </div>      
-       <v-dialog v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="selectedMessage">            
-            <v-card>
-                <v-list>
-                <v-list-tile>
-                    Actions for:
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{selectedMessage.chatUser.name}}</v-list-tile-title>
-                        <v-list-tile-sub-title>{{selectedMessage.message}}</v-list-tile-sub-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-                </v-list>
+        <div v-for="message in chatHistory" :key="message.id" class="chatMessage" @click.stop="showMenu(message)">
+            <v-layout row v-bind:reverse="chatUser.id === message.chatUser.id">
+                <div v-bind:class="{ ownSpeechBubble: message.chatUser.id === chatUser.id, speechBubble: message.chatUser.id !== chatUser.id}">
+                    <v-layout column justify-start align-start text-xs-left>
+                        <div class="font-weight-bold" v-bind:style="{ color: message.chatUser.color}" v-if="message.chatUser !== chatUser">
+                            {{message.chatUser.name}}
+                        </div>
+                        <div>
+                            {{message.message}}
+                        </div>
+                    </v-layout>
+                </div>
+            </v-layout>
+        </div>
+        <v-layout row justify-center v-if="menu">
+            <v-dialog v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x v-if="selectedMessage">            
+                <v-card>
+                    <v-list>
+                    <v-list-tile>
+                        Actions for: 
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{selectedMessage.chatUser.name}}</v-list-tile-title>
+                            <v-list-tile-sub-title>{{selectedMessage.message}}</v-list-tile-sub-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                    </v-list>
 
-                <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                <v-list>
-                <v-list-tile>
-                    <v-list-tile-action>
-                    <v-switch color="purple" v-model="censor"></v-switch>
-                    </v-list-tile-action>
-                    <v-list-tile-title>Censor message</v-list-tile-title>
-                </v-list-tile>
+                    <v-list>
+                    <v-list-tile>
+                        <v-list-tile-action>
+                        <v-switch color="purple" v-model="censor"></v-switch>
+                        </v-list-tile-action>
+                        <v-list-tile-title>Censor message</v-list-tile-title>
+                    </v-list-tile>
 
-                <v-list-tile>
-                    <v-list-tile-action>
-                    <v-switch color="purple" v-model="banUser"></v-switch>
-                    </v-list-tile-action>
-                    <v-list-tile-title>Ban User</v-list-tile-title>
-                </v-list-tile>
-                </v-list>
+                    <v-list-tile>
+                        <v-list-tile-action>
+                        <v-switch color="purple" v-model="banUser"></v-switch>
+                        </v-list-tile-action>
+                        <v-list-tile-title>Ban User</v-list-tile-title>
+                    </v-list-tile>
+                    </v-list>
 
-                <v-card-actions>
-                <v-spacer></v-spacer>
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
 
-                <v-btn flat @click="menu = false">Cancel</v-btn>
-                <v-btn color="primary" flat @click="menu = false">Apply</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
+                    <v-btn flat @click="menu = false">Cancel</v-btn>
+                    <v-btn color="primary" flat @click="menu = false">Apply</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-layout>      
     </v-layout>
 </template>
 
@@ -77,8 +78,10 @@
         },
         methods: {
             showMenu(message) {
-                console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(this.selectedMessage))
-                this.selectedMessage = message
+                if (message) {
+                    console.log('[ChatHistory_showMenu] setting selectedMessage to: ' + JSON.stringify(this.selectedMessage))
+                    this.selectedMessage = message                    
+                }
                 if (this.chatUser.admin){
                     this.menu = true;
                     console.log('[ChatHistory_showMenu] opening menu')
