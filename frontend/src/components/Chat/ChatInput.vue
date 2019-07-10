@@ -89,6 +89,7 @@ import {mapGetters} from 'vuex'
                             chatUser.admin = true
                             this.adminSwitch = false
                         }
+                        this.adminSwitch = false
                         this.$store.dispatch('joinChat', chatUser)
                         //console.log('[onSubmit] Storing cookie')
                         this.$cookies.set('chatUser',chatUser)
