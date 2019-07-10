@@ -6,7 +6,7 @@ const io = require('socket.io')(server);
 const port = process.env.PORT || 8080;
 
 //To avoid error 400 behind nginx reverse proxy
-io.set('transports', ["websocket"]);
+io.set('transports', ['polling','websockets']);
 prettyPrint = (method,endpoint, req) => {
     console.log(`[${method}: ${endpoint}]\nHeaders: ${JSON.stringify(req.headers)}\nBody: ${JSON.stringify(req.body)}`);
 };
