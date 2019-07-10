@@ -101,6 +101,7 @@
                 
             },
             takeAction() {
+                this.menu = false
                 if (this.mute != this.selectedMessage.muted) {
                     this.selectedMessage.muted = this.mute
                     this.$store.dispatch('muteMessage',this.selectedMessage)
@@ -112,7 +113,7 @@
                 this.ban = false
                 this.mute = false
                 this.selectedMessage = undefined
-                this.menu = false
+                
             }
 
         },
