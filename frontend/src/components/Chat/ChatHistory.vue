@@ -109,11 +109,10 @@
                     this.selectedMessage.chatUser.banned = this.ban
                     this.$store.dispatch('banUser',this.selectedMessage.chatUser)
                 }                
-
-                this.menu = false
                 this.ban = false
                 this.mute = false
                 this.selectedMessage = undefined
+                this.menu = false
             }
 
         },
