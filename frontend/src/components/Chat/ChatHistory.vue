@@ -21,7 +21,7 @@
             </v-layout>
         </div>
         <v-layout row justify-center v-if="menu">
-            <v-dialog v-model="menu" v-if="selectedMessage"> 
+            <v-dialog v-model="menu" v-if="selectedMessage" dark> 
                 <!-- max-width="300"            -->
                 <v-card>
                     <v-card-title>
@@ -61,7 +61,7 @@
                     <v-spacer></v-spacer>
 
                     <v-btn flat @click="menu = false">Cancel</v-btn>
-                    <v-btn flat @click="takeAction()">Apply</v-btn>
+                    <v-btn flat @click.stop="takeAction()">Apply</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
