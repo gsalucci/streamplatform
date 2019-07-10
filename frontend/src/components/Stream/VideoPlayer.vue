@@ -53,6 +53,9 @@
                                     type: 'application/x-mpegURL'
                                 })
                                 this.player.play()
+                                .catch(e => {
+                                    console.log('[VideoPlayer_streamOnline] play error. cannot automagically play')
+                                })                                
                                 clearInterval(interval)
                             }
                         })
@@ -74,6 +77,9 @@
                         type: 'video/mp4'
                     })
                     this.player.play()
+                    .catch(e => {
+                        console.log('[VideoPlayer_vod] play error. cannot automagically play')
+                    })
                 }
             }
 
