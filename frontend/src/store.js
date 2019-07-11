@@ -59,7 +59,6 @@ export default new Vuex.Store({
     },
     PLAY_VOD: (state,payload) => {
       state.vod = payload
-      state.playStream = false
     },
     CHANGE_MESSAGE_PROPERTY: (state, payload) => {
       /*
@@ -156,6 +155,7 @@ export default new Vuex.Store({
     playVod: (context,payload) => {
       //console.log('[playVod] playing: '+payload)
       context.commit('PLAY_VOD',payload)
+      context.commit('PLAY_STREAM',false)
     },
     banUser: (context, payload) => {
       console.log('[banUser] applying banned status: '+ payload.banned + ' to user id: ' + payload.id)
