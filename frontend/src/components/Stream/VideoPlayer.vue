@@ -82,7 +82,8 @@
                     })
                 }
             },
-            playStream(){
+
+            playStream: function () {
                 console.log('PlayStream is: '+ this.playStream + ' streamOnline is: '+this.streamOnline)
                 if(this.streamOnline && this.playStream){
                     this.player.src({
