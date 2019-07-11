@@ -15,7 +15,8 @@ export default new Vuex.Store({
     notification: undefined,
     hostname: undefined,
     vods: undefined,
-    vod: undefined
+    vod: undefined,
+    playStream: false,
 
   },
   mutations: {
@@ -58,6 +59,7 @@ export default new Vuex.Store({
     },
     PLAY_VOD: (state,payload) => {
       state.vod = payload
+      state.playStream = false
     },
     CHANGE_MESSAGE_PROPERTY: (state, payload) => {
       /*
@@ -87,9 +89,10 @@ export default new Vuex.Store({
       console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + '; was: '+ state.chatHistory[i].chatUser[payload.prop])
       state.chatHistory[i].chatUser[payload.prop] = payload.newValue
      }
-
+    },
+    PLAY_STREAM: (state, payload) => {
+      state.playStream = payload
     }
-
   },
   actions: {
 
@@ -169,6 +172,10 @@ export default new Vuex.Store({
       console.log('[muteMessage] applying muted status: '+ payload.muted + ' to message id: ' + payload.id)
       socket.emit('mute_message',payload)
       context.commit('CHANGE_MESSAGE_PROPERTY',{id:payload.id, prop:'muted',newValue:payload.muted})
+    },
+    playStream: (context, payload) => {
+      console.log('[playStream]' + payload)
+      context.commit('PLAY_STREAM',payload)
     }
 
 

@@ -17,7 +17,25 @@
         </v-list-tile>
       </v-list>
       <v-divider light/>
+      <v-list v-if="streamOnline">
+        <v-list-tile @click.stop="playLiveStream()">
+          <v-list-tile-content>
+            <v-list-tile-title>
+              <v-layout row justify-start>
+                <v-icon class="mr-2">live_tv</v-icon>{{streamName}}
+              </v-layout>
+            </v-list-tile-title>
+            <v-list-tile-subtitle>
+              LIVE
+            </v-list-tile-subtitle>
+          </v-list-tile-content>
+          <v-list-tile-action>
+            <v-icon @click.stop="playLiveStream()" >chevron_right</v-icon>
+          </v-list-tile-action>
+        </v-list-tile>
+      </v-list>
       <v-list>
+        <v-divider light v-if="streamOnline"/>
         <v-list-tile v-for="v in vods" v-bind:key="v.mtime" @click="playVod(v)">
           <v-list-tile-content>
             <v-list-tile-title>
@@ -73,7 +91,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['vods'])
+    ...mapGetters(['vods','streamOnline','streamName'])
   },
   methods: {
     refreshVods() {
@@ -83,6 +101,11 @@ export default {
     playVod(v) {
       //console.log('[App] playVod: '+JSON.stringify(v))
       this.$store.dispatch('playVod',v.name)
+      this.drawer = false
+    },
+    playLiveStream() {
+      //console.log('[App] playVod: '+JSON.stringify(v))
+      this.$store.dispatch('playStream',true)
       this.drawer = false
     },
     formatDate(d){

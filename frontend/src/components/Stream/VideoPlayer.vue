@@ -30,7 +30,7 @@
             videoPlayer
         },
         computed: {
-            ...mapGetters(['streamName', 'streamOnline','vod']),
+            ...mapGetters(['streamName', 'streamOnline','vod','playStream']),
             player() {
                 return this.$refs.videoPlayer.player
             }
@@ -80,6 +80,15 @@
                     .catch(e => {
                         console.log('[VideoPlayer_vod] play error. cannot automagically play')
                     })
+                }
+            },
+            playStream(){
+                if(this.streamOnline && this.playStream){
+                    this.player.src({
+                        src: '/hls/' + this.streamName + '.m3u8',
+                        type: 'application/x-mpegURL'
+                    })
+                    this.player.play()                    
                 }
             }
 
