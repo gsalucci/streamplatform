@@ -90,6 +90,7 @@ export default new Vuex.Store({
      }
     },
     PLAY_STREAM: (state, payload) => {
+      console.log('[PLAY_STREAM] '+ payload)
       state.playStream = payload
     }
   },

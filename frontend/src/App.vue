@@ -104,7 +104,7 @@ export default {
       this.drawer = false
     },
     playLiveStream() {
-      //console.log('[App] playVod: '+JSON.stringify(v))
+      console.log('[App] playStream: dispatching action')
       this.$store.dispatch('playStream',true)
       this.drawer = false
     },
