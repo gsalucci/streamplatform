@@ -193,6 +193,7 @@ export default new Vuex.Store({
     notification: state => state.notification,
     hostname: state => state.hostname,
     vods: state => state.vods,
-    vod: state => state.vod
+    vod: state => state.vod,
+    playStream: state=> state.playStream
   }
 })

@@ -35,8 +35,6 @@
                 return this.$refs.videoPlayer.player
             }
         },
-        methods: {
-        },
         watch: {
             streamOnline() {
                 if (this.streamOnline) {
