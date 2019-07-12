@@ -214,9 +214,9 @@ The backend of this application consists of 3 services:
     Expected payload is: a [chatMessage](#chat-message-object) object.
 
 # Frontend Docs
-The frontend of this application consists of a *SPA*, built using the [Vue.js]() framework, styling, inspired by the: "material design" specifications is handled by the [Vuetify.js]() module, while the playback of the live stream and VoDs is handled by [video.js]() player; the comunication with the backend is handled by a Socket.io [client]().
+The frontend of this application consists of a *SPA*, built using the [Vue.js](https://vuejs.org/) framework, styling, inspired by the: "material design" specifications is handled by the [Vuetify.js](https://vuetifyjs.com/en/) module, while the playback of the live stream and VoDs is handled by [video.js](https://videojs.com/) player; the comunication with the backend is handled by a Socket.io [client](https://socket.io/).
 
-Application's status is managed using a [Vuex]() store, mutations and actions due to the asyncronous nature of the operations.
+Application's status is managed using a [Vuex](https://vuex.vuejs.org/) store, mutations and actions due to the asyncronous nature of the operations.
 
 A great part of the responsibilities of this application lie on the frontend. 
 It has to be able to:
