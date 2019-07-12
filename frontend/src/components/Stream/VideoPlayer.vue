@@ -52,7 +52,7 @@
                                 })
                                 this.player.play()
                                 .catch(e => {
-                                    console.log('[VideoPlayer_streamOnline] play error. cannot automagically play')
+                                    console.log('[VideoPlayer_streamOnline] play error. cannot automagically play: '+e)
                                 })                                
                                 clearInterval(interval)
                             }
@@ -76,7 +76,7 @@
                     })
                     this.player.play()
                     .catch(e => {
-                        console.log('[VideoPlayer_vod] play error. cannot automagically play')
+                        console.log('[VideoPlayer_vod] play error. cannot automagically play: ' + e)
                     })
                 }
             },

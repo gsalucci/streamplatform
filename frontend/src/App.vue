@@ -72,6 +72,16 @@
         </v-layout>
       </v-container>
     </v-content> 
+    <v-footer dark>
+      <v-flex xs12>
+        <v-layout row justify-center align-baseline>
+          <v-icon small class="ma-2" @click.stop="showGithub">
+            mdi-github-circle
+          </v-icon>
+          Made with ❤️ by Giancarmine Salucci
+        </v-layout>
+      </v-flex>
+    </v-footer>
   </v-app>
 </template>
 
@@ -110,6 +120,9 @@ export default {
     },
     formatDate(d){
       return new Date(d).toLocaleDateString(navigator.language || navigator.userLanguage,{year:'2-digit',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})
+    },
+    showGithub() {
+       window.open("https://github.com/mozempk", "_blank");
     }
   },
   created: function () {
