@@ -101,7 +101,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['vods','streamOnline','streamName'])
+    ...mapGetters(['vods','streamOnline','streamName']),
   },
   methods: {
     refreshVods() {
@@ -128,6 +128,15 @@ export default {
   created: function () {
     this.$store.dispatch('setHostname', location.host)
     this.$store.dispatch('setVods')
+    console.log('[created] vod query: ' + this.$route.query.vod)
+    if (this.$route.query.vod) {
+      if (this.$route.query.vod.split('.')[1] == 'mp4'){
+        console.log('[created] dispatching play vod action for vod: '+ this.$route.query.vod)
+        this.$store.dispatch('playVod',this.$route.query.vod)
+      }
+      
+    }
+    
   }
 }
 </script>

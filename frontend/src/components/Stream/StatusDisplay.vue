@@ -68,8 +68,8 @@
         },
         methods: {
             vodLink() {
-                console.log('[vodLInk] setting clipboard to: ' + 'https://stream.mpk.dynu.net/vod/'+ this.vod)
-                this.$clipboard('https://stream.mpk.dynu.net/vod/'+this.vod)
+                console.log('[vodLInk] setting clipboard to: ' + 'https://stream.mpk.dynu.net/?vod='+ this.vod)
+                this.$clipboard('https://stream.mpk.dynu.net/?vod='+this.vod)
                 this.tooltip = true
                 setTimeout(()=>{
                     this.tooltip = false
