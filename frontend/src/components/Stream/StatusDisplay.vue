@@ -74,14 +74,6 @@
                 setTimeout(()=>{
                     this.tooltip = false
                 },1000)                
-                this.$clipboard.$on('success', () => {
-                    console.log('[clipboard_onSuccess]')
-                    this.tooltip = true
-                    setTimeout(()=>{
-                        this.tooltip = false
-                    },1000)
-                })
-
             }
         }
         
