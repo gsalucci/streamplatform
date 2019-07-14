@@ -21,14 +21,15 @@
         </v-flex>
         <v-tooltip v-model="tooltip" bottom>
             <template v-slot:activator="{ on }">
-                <v-flex v-if="vod"
-                    v-clipboard="vodLink"
-                    v-clipboard:succes="clipboardSuccess">
+                <v-flex v-if="vod" @click="vodLink">
                     <v-icon>mdi-content-copy</v-icon>
                 </v-flex>
             </template>
         <span>Copied</span>
         </v-tooltip>
+        <v-flex v-if="vod">
+            Link
+        </v-flex>
         <v-flex>
             <v-icon>people</v-icon>
         </v-flex>
@@ -66,16 +67,21 @@
             },
         },
         methods: {
-            clipboardSuccess() {
-                //console.log('[clipboardSuccess] '+ value)
+            vodLink() {
+                console.log('[vodLInk] setting clipboard to: ' + 'https://stream.mpk.dynu.net/vod/'+ this.vod)
+                this.$clipboard('https://stream.mpk.dynu.net/vod/'+this.vod)
                 this.tooltip = true
                 setTimeout(()=>{
                     this.tooltip = false
-                },1000)
-            },
-            vodLink() {
-                console.log('[vodLInk] returning: ' + 'https://stream.mpk.dynu.net/vod/'+ this.vod)
-                return 'https://stream.mpk.dynu.net/vod/'+this.vod
+                },1000)                
+                this.$clipboard.$on('success', () => {
+                    console.log('[clipboard_onSuccess]')
+                    this.tooltip = true
+                    setTimeout(()=>{
+                        this.tooltip = false
+                    },1000)
+                })
+
             }
         }
         
