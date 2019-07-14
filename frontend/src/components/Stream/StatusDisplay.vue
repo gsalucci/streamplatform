@@ -69,7 +69,7 @@
             clipboardSuccess() {
                 //console.log('[clipboardSuccess] '+ value)
                 this.tooltip = true
-                setTimeout(function (){
+                setTimeout(()=>{
                     this.tooltip = false
                 },1000)
             }
