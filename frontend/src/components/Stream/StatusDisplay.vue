@@ -22,7 +22,7 @@
         <v-tooltip v-model="tooltip" bottom>
             <template v-slot:activator="{ on }">
                 <v-flex v-if="vod"
-                    v-clipboard="() => 'https://stream.mpk.dynu.net/vod/'+vod"
+                    v-clipboard="() => {return 'https://stream.mpk.dynu.net/vod/'+vod}"
                     v-clipboard:succes="clipboardSuccess">
                     <v-icon>mdi-content-copy</v-icon>
                 </v-flex>
