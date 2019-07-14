@@ -19,16 +19,16 @@
         <v-flex v-if="!vod">
             {{formattedDuration}}
         </v-flex>
-        <v-tooltip v-model="tooltip" bottom>
-            <template v-slot:activator="{ on }">
+        <!-- <v-tooltip v-model="tooltip" bottom>
+            <template v-slot:activator="{ on }"> -->
                 <v-flex v-if="vod"
                     v-clipboard="() => 'https://stream.mpk.dynu.net/vod/'+vod"
                     v-clipboard:succes="tooltip = !tooltip">
                     <v-icon>mdi-content-copy</v-icon>
                 </v-flex>
-            </template>
+            <!-- </template>
         <span>Copied</span>
-        </v-tooltip>
+        </v-tooltip> -->
         <v-flex>
             <v-icon>people</v-icon>
         </v-flex>
