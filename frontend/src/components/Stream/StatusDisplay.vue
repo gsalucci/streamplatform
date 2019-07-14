@@ -64,10 +64,6 @@
                 h = Math.floor(t/ 3600)
                 return h + ' : ' + m + ' : ' + s
             },
-            vodLink() {
-                console.log('[vodLInk] returning: ' + 'https://stream.mpk.dynu.net/vod/'+ this.vod)
-                return 'https://stream.mpk.dynu.net/vod/'+this.vod
-            }
         },
         methods: {
             clipboardSuccess() {
@@ -76,6 +72,10 @@
                 setTimeout(()=>{
                     this.tooltip = false
                 },1000)
+            },
+            vodLink() {
+                console.log('[vodLInk] returning: ' + 'https://stream.mpk.dynu.net/vod/'+ this.vod)
+                return 'https://stream.mpk.dynu.net/vod/'+this.vod
             }
         }
         
