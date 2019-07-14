@@ -16,7 +16,7 @@ export default new Vuex.Store({
     hostname: undefined,
     vods: undefined,
     vod: undefined,
-    playStream: false,
+    playStream: true,
 
   },
   mutations: {
@@ -177,6 +177,7 @@ export default new Vuex.Store({
     playStream: (context, payload) => {
       console.log('[playStream]' + payload)
       context.commit('PLAY_STREAM',payload)
+      context.commit('PLAY_VOD', undefined)
     }
 
 
