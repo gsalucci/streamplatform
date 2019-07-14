@@ -66,12 +66,12 @@
             }
         },
         methods: {
-            clipboardSuccess({ value, event }) {
-                console.log('[clipboardSuccess] '+ value)
-                // this.tooltip = true
-                // setTimeout(function (){
-                //     this.tooltip = false
-                // },1000)
+            clipboardSuccess() {
+                //console.log('[clipboardSuccess] '+ value)
+                this.tooltip = true
+                setTimeout(function (){
+                    this.tooltip = false
+                },1000)
             }
         }
         
