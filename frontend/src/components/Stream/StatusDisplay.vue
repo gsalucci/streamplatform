@@ -22,7 +22,7 @@
         <v-tooltip v-model="tooltip" bottom>
             <template v-slot:activator="{ on }">
                 <v-flex v-if="vod"
-                    v-clipboard="() => {return 'https://stream.mpk.dynu.net/vod/'+vod}"
+                    v-clipboard="vodLink"
                     v-clipboard:succes="clipboardSuccess">
                     <v-icon>mdi-content-copy</v-icon>
                 </v-flex>
@@ -63,6 +63,10 @@
                 m = Math.floor(t / 60) < 60 ? Math.floor(t / 60) : Math.floor(t / 60) - 60
                 h = Math.floor(t/ 3600)
                 return h + ' : ' + m + ' : ' + s
+            },
+            vodLink() {
+                console.log('[vodLInk] returning: ' + 'https://stream.mpk.dynu.net/vod/'+ this.vod)
+                return 'https://stream.mpk.dynu.net/vod/'+this.vod
             }
         },
         methods: {
