@@ -19,16 +19,16 @@
         <v-flex v-if="!vod">
             {{formattedDuration}}
         </v-flex>
-        <!-- <v-tooltip v-model="tooltip" bottom>
-            <template v-slot:activator="{ on }"> -->
+        <v-tooltip v-model="tooltip" bottom>
+            <template v-slot:activator="{ on }">
                 <v-flex v-if="vod"
                     v-clipboard="() => 'https://stream.mpk.dynu.net/vod/'+vod"
-                    v-clipboard:succes="tooltip = !tooltip">
+                    v-clipboard:succes="clipboardSuccess">
                     <v-icon>mdi-content-copy</v-icon>
                 </v-flex>
-            <!-- </template>
+            </template>
         <span>Copied</span>
-        </v-tooltip> -->
+        </v-tooltip>
         <v-flex>
             <v-icon>people</v-icon>
         </v-flex>
@@ -66,8 +66,12 @@
             }
         },
         methods: {
-            showTooltip() {
-
+            clipboardSuccess({ value, event }) {
+                console.log('[clipboardSuccess] '+ value)
+                this.tooltip = true
+                setTimeout(function (){
+                    this.tooltip = false
+                },1500)
             }
         }
         
