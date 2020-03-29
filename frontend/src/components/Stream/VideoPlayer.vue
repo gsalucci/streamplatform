@@ -1,6 +1,5 @@
 <template>
-<video-player class="vjs-big-play-centered" controls :playsinline="true" :options='playerOptions' ref="videoPlayer"/>
-    <!-- video-js vjs-default-skin  -->
+    <video-player class="vjs-big-play-centered" controls :playsinline="true" :options='playerOptions' ref="videoPlayer"/>   
 </template>
 
 <script>
@@ -68,10 +67,12 @@
             },
             vod(){
                 if (this.vod) {
-                    
-                    console.log('[vodWatcher] setting player source to: https://stream.mpk.dynu.net/vod/'+this.vod)
+                    const proto = window.location.protocol
+                    const host = window.location.host
+                    const url = proto + '//' + host + '/vod/'+this.vod
+                    console.log('[vodWatcher] setting player source to:' + url)
                     this.player.src({
-                        src: 'https://stream.mpk.dynu.net/vod/' + this.vod,
+                        src: url,
                         type: 'video/mp4'
                     })
                     this.player.play()
@@ -94,12 +95,8 @@
 
         },
         mounted: function() {
-            console.log('[videoPlayer_created] setting videojs log level to off')
+            // console.log('[videoPlayer_created] setting videojs log level to off')
             this.player.log.level('off')
         }
     }
 </script>
-
-<style>
-
-</style>

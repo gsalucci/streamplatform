@@ -70,7 +70,7 @@ export default new Vuex.Store({
       */
       let i = state.chatHistory.indexOf(state.chatHistory.find(m => m.id == payload.id))
       if (i >= 0){
-        console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + '; was: '+ state.chatHistory[i][payload.prop])
+        // console.log('changing message id: '+payload.id+' property: ' + payload.prop + ' to: ' + payload.newValue + '; was: '+ state.chatHistory[i][payload.prop])
         state.chatHistory[i][payload.prop] = payload.newValue
       }
       
@@ -85,7 +85,7 @@ export default new Vuex.Store({
       */
      let i = state.chatHistory.indexOf(state.chatHistory.find(m => m.id == payload.id))
      if (i >= 0) {
-      console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + '; was: '+ state.chatHistory[i].chatUser[payload.prop])
+      // console.log('changing message id: '+payload.id+'\'s chatUser\'s property: ' + payload.prop + ' to: ' + payload.newValue + '; was: '+ state.chatHistory[i].chatUser[payload.prop])
       state.chatHistory[i].chatUser[payload.prop] = payload.newValue
      }
     },
@@ -179,9 +179,6 @@ export default new Vuex.Store({
       context.commit('PLAY_STREAM',payload)
       context.commit('PLAY_VOD', undefined)
     }
-
-
-
   },
   getters: {
     streamName: state => state.streamName,

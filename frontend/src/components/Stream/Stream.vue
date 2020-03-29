@@ -1,25 +1,9 @@
-<template>
-    <!-- <v-card hidden-md-and-down>
-        <v-card-text>
-            <v-flex xs12>
-                <VideoPlayer/>
-            </v-flex>
-        </v-card-text>
-        <v-divider/>
-        <v-card-actions class="pa-3" justify-center>
-            <StatusDisplay/>
-        </v-card-actions>
-    </v-card> -->
-    
+<template>    
     <v-layout column justify-center>
-
-            <VideoPlayer/>
-            <v-divider class="mt-2"/>
-            <StatusDisplay/>
+        <VideoPlayer/>
+        <v-divider class="mt-2"/>
+        <StatusDisplay/>
     </v-layout>
-   
-
-
 </template>
 
 <script>
